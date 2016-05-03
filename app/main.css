@@ -5,8 +5,94 @@ html, body {
 	padding: 0;
 }
 
+#app {
+	height: 100%;
+	width: 100%;
+}
+
 .background {
 	position: absolute;
 	height: 100%;
 	width: 100%;
+	z-index: -1;
+}
+
+.background-border {
+	width: 90%;
+    height: 90%;
+    border: 5px solid white;
+    margin: auto;
+    top: 50%;
+    position: relative;
+    -webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.container {
+	height: 100%;
+	width: 100%;
+}
+
+.layout {
+	height: 100%;
+	width: 100%;
+	display: flex;
+}
+
+.left-col {
+	height: 100%;
+	min-width: 7.7%;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	-webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;    
+    transition: all 500ms ease-in-out;
+}
+
+.left-col:hover {
+	flex-grow: 13;
+}
+
+.center-col {
+	height: 100%;
+	flex-grow: 12;
+	display: flex;
+	flex-direction: column;
+}
+
+.right-col {
+	height: 100%;
+	min-width: 7.7%;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	-webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;    
+    transition: all 500ms ease-in-out;
+}
+
+.right-col:hover {
+	flex-grow: 13;
+}
+
+.center-col .middle-row {
+	border: 2px solid white;
+}
+
+.top-row {
+	flex-grow: 1;
+}
+
+.middle-row {
+	flex-grow: 12;
+}
+
+.bottom-row {
+	flex-grow: 1;
 }
