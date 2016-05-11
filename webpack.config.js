@@ -75,8 +75,7 @@ if(TARGET === 'start' || !TARGET) {
         // Define development specific CSS setup
         {
           test: /\.css$/,
-          loaders: ['style', 'css'],
-          include: PATHS.app
+          loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
         }
       ]
     },

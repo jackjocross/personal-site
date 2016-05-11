@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './main.css';
 
 export default class Layout extends React.Component {
 	constructor(props) {
@@ -33,23 +34,23 @@ export default class Layout extends React.Component {
 		};
 
 		return (
-			<div className="layout">
-				<div style={leftStyle} className="left-col" onClick={this.leftClick}>
-					<div style={topStyle} className="top-row"></div>
-					<div className="middle-row"></div>
-					<div style={bottomStyle} className="bottom-row"></div>
+			<div className={ styles.layout }>
+				<div style={leftStyle} className={styles.leftCol} onClick={this.leftClick}>
+					<div style={topStyle} className={styles.topRow}></div>
+					<div className={styles.middleRow}></div>
+					<div style={bottomStyle} className={styles.bottomRow}></div>
 				</div>
 
-				<div className="center-col">
-					<div style={topStyle} className="top-row" onClick={this.topClick}></div>
-					<div className="middle-row" onClick={this.centerClick}></div>
-					<div style={bottomStyle} className="bottom-row" onClick={this.bottomClick}></div>
+				<div className={styles.centerCol}>
+					<div style={topStyle} className={styles.topRow} onClick={this.topClick}></div>
+					<div className={styles.middleRow} onClick={this.centerClick}></div>
+					<div style={bottomStyle} className={styles.bottomRow} onClick={this.bottomClick}></div>
 				</div>
 
-				<div style={rightStyle} className="right-col" onClick={this.rightClick}>
-					<div style={topStyle} className="top-row"></div>
-					<div className="middle-row"></div>
-					<div style={bottomStyle} className="bottom-row"></div>
+				<div style={rightStyle} className={styles.rightCol} onClick={this.rightClick}>
+					<div style={topStyle} className={styles.topRow}></div>
+					<div className={styles.middleRow}></div>
+					<div style={bottomStyle} className={styles.bottomRow}></div>
 				</div>
 			</div>
 		);

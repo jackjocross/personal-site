@@ -5,7 +5,7 @@ html, body {
 	padding: 0;
 }
 
-#app {
+.app {
 	height: 100%;
 	width: 100%;
 }
@@ -17,7 +17,7 @@ html, body {
 	z-index: -1;
 }
 
-.background-border {
+.backgroundBorder {
 	width: 90%;
     height: 90%;
     border: 5px solid white;
@@ -40,7 +40,7 @@ html, body {
 	display: flex;
 }
 
-.left-col {
+.leftCol {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -51,18 +51,18 @@ html, body {
     transition: width 500ms ease-in-out;
 }
 
-.left-col .middle-row:hover {
+.leftCol .middleRow:hover {
 	background: rgba(255 ,255 ,255 ,0.2);
 }
 
-.center-col {
+.centerCol {
 	height: 100%;
 	flex-grow: 12;
 	display: flex;
 	flex-direction: column;
 }
 
-.center-col .top-row {
+.centerCol .topRow {
 	-webkit-transition: height 500ms ease-in-out;
     -moz-transition: height 500ms ease-in-out;
     -o-transition: height 500ms ease-in-out;
@@ -70,7 +70,7 @@ html, body {
     transition: height 500ms ease-in-out;
 }
 
-.center-col .bottom-row {
+.centerCol .bottomRow {
 	-webkit-transition: height 500ms ease-in-out;
     -moz-transition: height 500ms ease-in-out;
     -o-transition: height 500ms ease-in-out;
@@ -78,7 +78,7 @@ html, body {
     transition: height 500ms ease-in-out;
 }
 
-.right-col {
+.rightCol {
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -89,22 +89,22 @@ html, body {
     transition: width 500ms ease-in-out;
 }
 
-.right-col .middle-row:hover {
+.rightCol .middleRow:hover {
 	background: rgba(255, 255, 255, 0.2);
 }
 
-.center-col .top-row:hover {
+.centerCol .topRow:hover {
 	background: rgba(255, 255, 255, 0.2);
 }
 
-.center-col .bottom-row:hover {
+.centerCol .bottomRow:hover {
 	background: rgba(255, 255, 255, 0.2);
 }
 
-.center-col .middle-row {
+.centerCol .middleRow {
 	border: 2px solid white;
 }
 
-.middle-row {
+.middleRow {
 	flex-grow: 1;
 }

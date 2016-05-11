@@ -1,6 +1,7 @@
 import React from 'react';
 import Background from './Background.jsx';
 import Layout from './Layout.jsx';
+import styles from './main.css';
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -12,7 +13,7 @@ export default class App extends React.Component {
 	}
 	render() {
 		return (
-			<div className="container" onClick={this.containerClick}>
+			<div className={styles.container} onClick={this.containerClick}>
 				<Background hue={this.state.backgroundHue} />
 				<Layout />
 			</div>

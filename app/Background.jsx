@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './main.css';
 
 export default class Background extends React.Component {
 	render() {
@@ -15,7 +16,7 @@ export default class Background extends React.Component {
 		};
 
 		return (
-			<div style={backgroundStyle} className="background" onClick={this.backgroundClick}>
+			<div style={backgroundStyle} className={styles.background} onClick={this.backgroundClick}>
 			</div>
 		);
 	};
