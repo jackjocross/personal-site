@@ -4,29 +4,32 @@ export default class Layout extends React.Component {
 	constructor(props) {
 		super(props);
 
+		this.closed = '10%';
+		this.expanded = '50%';
+
 		this.state = {
-			topFlex: 1, 
-			rightFlex: 1,
-			bottomFlex: 1,
-			leftFlex: 1,
+			topHeight: this.closed, 
+			rightWidth: this.closed,
+			bottomHeight: this.closed,
+			leftWidth: this.closed,
 		};
 	}
 	render() {
 
 		const topStyle = {
-			flexGrow: this.state.topFlex
+			height: this.state.topHeight
 		};
 
 		const rightStyle = {
-			flexGrow: this.state.rightFlex
+			width: this.state.rightWidth
 		};
 
 		const bottomStyle = {
-			flexGrow: this.state.bottomFlex
+			height: this.state.bottomHeight
 		};
 
 		const leftStyle = {
-			flexGrow: this.state.leftFlex
+			width: this.state.leftWidth
 		};
 
 		return (
@@ -52,47 +55,47 @@ export default class Layout extends React.Component {
 		);
 	};
 	leftClick = () => {
-		let leftFlex = 13, 
-		rightFlex = 1;
-		if (this.state.leftFlex > 1) {
-			leftFlex = 1;
+		let leftWidth = this.expanded, 
+		rightWidth = this.closed;
+		if (this.state.leftFlex === this.expanded) {
+			leftWidth = this.closed;
 		}
 
-		this.setState({leftFlex, rightFlex});
+		this.setState({leftWidth, rightWidth});
 	};
 	rightClick = () => {
-		let rightFlex = 13, 
-		leftFlex = 1;
-		if (this.state.rightFlex > 1) {
-			rightFlex = 1;
+		let rightWidth = this.expanded, 
+		leftWidth = this.closed;
+		if (this.state.rightWidth === this.expanded) {
+			rightWidth = this.closed;
 		}
 
-		this.setState({rightFlex, leftFlex});
+		this.setState({rightWidth, leftWidth});
 	};
 	centerClick = () => {
-		let leftFlex = 1, 
-		rightFlex = 1, 
-		topFlex = 1,
-		bottomFlex = 1;
+		let leftWidth = this.closed, 
+		rightWidth = this.closed, 
+		topHeight = this.closed,
+		bottomHeight = this.closed;
 
-		this.setState({leftFlex, rightFlex, topFlex, bottomFlex});
+		this.setState({leftWidth, rightWidth, topHeight, bottomHeight});
 	};
 	topClick = () => {
-		let topFlex = 13, 
-		bottomFlex = 1;
-		if (this.state.topFlex > 1) {
-			topFlex = 1;
+		let topHeight = this.expanded, 
+		bottomHeight = this.closed;
+		if (this.state.topHeight === this.expanded) {
+			topHeight = this.closed;
 		}
 
-		this.setState({topFlex, bottomFlex});
+		this.setState({topHeight, bottomHeight});
 	};
 	bottomClick = () => {
-		let bottomFlex = 13, 
-		topFlex = 1;
-		if (this.state.bottomFlex > 1) {
-			bottomFlex = 1;
+		let bottomHeight = this.expanded, 
+		topHeight = this.closed;
+		if (this.state.bottomHeight === this.expanded) {
+			bottomHeight = this.closed;
 		}
 
-		this.setState({bottomFlex, topFlex});
+		this.setState({bottomHeight, topHeight});
 	};
 } 

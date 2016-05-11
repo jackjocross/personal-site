@@ -15,12 +15,6 @@ html, body {
 	height: 100%;
 	width: 100%;
 	z-index: -1;
-
-	-webkit-transition: all 500ms ease-in-out;
-    -moz-transition: all 500ms ease-in-out;
-    -o-transition: all 500ms ease-in-out;
-    -ms-transition: all 500ms ease-in-out;    
-    transition: all 500ms ease-in-out;
 }
 
 .background-border {
@@ -48,14 +42,13 @@ html, body {
 
 .left-col {
 	height: 100%;
-	min-width: 7.7%;
 	display: flex;
 	flex-direction: column;
-	-webkit-transition: all 500ms ease-in-out;
-    -moz-transition: all 500ms ease-in-out;
-    -o-transition: all 500ms ease-in-out;
-    -ms-transition: all 500ms ease-in-out;    
-    transition: all 500ms ease-in-out;
+	-webkit-transition: width 500ms ease-in-out;
+    -moz-transition: width 500ms ease-in-out;
+    -o-transition: width 500ms ease-in-out;
+    -ms-transition: width 500ms ease-in-out;    
+    transition: width 500ms ease-in-out;
 }
 
 .left-col .middle-row:hover {
@@ -70,34 +63,41 @@ html, body {
 }
 
 .center-col .top-row {
-	-webkit-transition: all 500ms ease-in-out;
-    -moz-transition: all 500ms ease-in-out;
-    -o-transition: all 500ms ease-in-out;
-    -ms-transition: all 500ms ease-in-out;    
-    transition: all 500ms ease-in-out;
+	-webkit-transition: height 500ms ease-in-out;
+    -moz-transition: height 500ms ease-in-out;
+    -o-transition: height 500ms ease-in-out;
+    -ms-transition: height 500ms ease-in-out;    
+    transition: height 500ms ease-in-out;
 }
 
 .center-col .bottom-row {
-	-webkit-transition: all 500ms ease-in-out;
-    -moz-transition: all 500ms ease-in-out;
-    -o-transition: all 500ms ease-in-out;
-    -ms-transition: all 500ms ease-in-out;    
-    transition: all 500ms ease-in-out;
+	-webkit-transition: height 500ms ease-in-out;
+    -moz-transition: height 500ms ease-in-out;
+    -o-transition: height 500ms ease-in-out;
+    -ms-transition: height 500ms ease-in-out;    
+    transition: height 500ms ease-in-out;
 }
 
 .right-col {
 	height: 100%;
-	min-width: 7.7%;
 	display: flex;
 	flex-direction: column;
-	-webkit-transition: all 500ms ease-in-out;
-    -moz-transition: all 500ms ease-in-out;
-    -o-transition: all 500ms ease-in-out;
-    -ms-transition: all 500ms ease-in-out;    
-    transition: all 500ms ease-in-out;
+	-webkit-transition: width 500ms ease-in-out;
+    -moz-transition: width 500ms ease-in-out;
+    -o-transition: width 500ms ease-in-out;
+    -ms-transition: width 500ms ease-in-out;    
+    transition: width 500ms ease-in-out;
 }
 
 .right-col .middle-row:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.center-col .top-row:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.center-col .bottom-row:hover {
 	background: rgba(255, 255, 255, 0.2);
 }
 
@@ -106,15 +106,5 @@ html, body {
 }
 
 .middle-row {
-	flex-grow: 12;
-}
-
-.top-row {
-	min-height: 3%;
-	flex-grow: 1;
-}
-
-.bottom-row {
-	min-height: 3%;
 	flex-grow: 1;
 }
