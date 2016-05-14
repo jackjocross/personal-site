@@ -11,7 +11,6 @@ const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build'),
-  style: path.join(__dirname, 'app/main.css')
 };
 const ENV = {
   host: process.env.HOST || 'localhost',
@@ -52,9 +51,6 @@ const common = {
 
 if(TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
-    entry: {
-      style: PATHS.style
-    },
     devtool: 'eval-source-map',
     devServer: {
       historyApiFallback: true,
