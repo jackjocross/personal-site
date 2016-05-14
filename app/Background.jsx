@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './main.css';
+import styles from './background.css';
 
 export default class Background extends React.Component {
 	render() {
@@ -20,4 +20,4 @@ export default class Background extends React.Component {
 			</div>
 		);
 	};
-} 
+}

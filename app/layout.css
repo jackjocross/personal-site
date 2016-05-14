@@ -1,39 +1,3 @@
-html, body {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-}
-
-.app {
-	height: 100%;
-	width: 100%;
-}
-
-.background {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	z-index: -1;
-}
-
-.backgroundBorder {
-	width: 90%;
-    height: 90%;
-    border: 5px solid white;
-    margin: auto;
-    top: 50%;
-    position: relative;
-    -webkit-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
-}
-
-.container {
-	height: 100%;
-	width: 100%;
-}
-
 .layout {
 	height: 100%;
 	width: 100%;
@@ -51,10 +15,6 @@ html, body {
     transition: width 500ms ease-in-out;
 }
 
-.leftCol .middleRow:hover {
-	background: rgba(255 ,255 ,255 ,0.2);
-}
-
 .centerCol {
 	height: 100%;
 	flex-grow: 12;
@@ -68,6 +28,7 @@ html, body {
     -o-transition: height 500ms ease-in-out;
     -ms-transition: height 500ms ease-in-out;    
     transition: height 500ms ease-in-out;
+    display: flex;
 }
 
 .centerCol .bottomRow {
@@ -76,6 +37,7 @@ html, body {
     -o-transition: height 500ms ease-in-out;
     -ms-transition: height 500ms ease-in-out;    
     transition: height 500ms ease-in-out;
+    display: flex;
 }
 
 .rightCol {
@@ -89,7 +51,19 @@ html, body {
     transition: width 500ms ease-in-out;
 }
 
+.leftCol .middleRow:hover {
+	background: rgba(255 ,255 ,255 ,0.2);
+}
+
+.leftCol.expandWidth .middleRow {
+	background: rgba(255 ,255 ,255 ,0.2);
+}
+
 .rightCol .middleRow:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.rightCol.expandWidth .middleRow {
 	background: rgba(255, 255, 255, 0.2);
 }
 
@@ -97,7 +71,15 @@ html, body {
 	background: rgba(255, 255, 255, 0.2);
 }
 
+.centerCol .topRow.expandHeight {
+	background: rgba(255, 255, 255, 0.2);
+}
+
 .centerCol .bottomRow:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.centerCol .bottomRow.expandHeight {
 	background: rgba(255, 255, 255, 0.2);
 }
 
@@ -106,5 +88,24 @@ html, body {
 }
 
 .middleRow {
+	display: flex;
 	flex-grow: 1;
+}
+
+.closeHeight {
+	height: 10%;
+	max-height: 75px;
+}
+
+.expandHeight {
+	height: 50%;
+}
+
+.closeWidth {
+	width: 10%;
+	max-width: 75px;
+}
+
+.expandWidth {
+	width: 50%;
 }
