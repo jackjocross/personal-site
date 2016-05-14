@@ -3,70 +3,83 @@ import PageSettings from './PageSettings.jsx';
 import styles from './layout.css';
 
 export default class Layout extends React.Component {
-	
-
-
 	constructor(props) {
 		super(props);
+	
+		this.columns = 2;
+		this.rows = 2;
 
-		this.leftParams = ['leftCol', 'rightCol', 'expandWidth', 'closeWidth'];
-		this.rightParams = ['rightCol', 'leftCol', 'expandWidth', 'closeWidth'];
-		this.topParams = ['topRow', 'bottomRow', 'expandHeight', 'closeHeight'];
-		this.bottomParams = ['bottomRow', 'topRow', 'expandHeight', 'closeHeight'];
+		let verticalUnit = 100 / this.rows;
+		let horizontalUnit = 100 / this.columns;
 
-		this.initialState = {
-			leftCol: styles.leftCol + ' ' + styles.closeWidth,
-			topRow: styles.topRow + ' ' + styles.closeHeight,
-			bottomRow: styles.bottomRow + ' ' + styles.closeHeight,
-			rightCol: styles.rightCol + ' ' + styles.closeWidth
+		this.createPanel = function Panel(heightIn, widthIn, xPlacementIn, yPlacementIn) {
+			
+			this.setStyle = (height, width, xPlacement, yPlacement) => {
+				this.style = {
+					height: `${height.toFixed(2).toString()}%`,
+					width: `${width.toFixed(2).toString()}%`,
+					left: `${(xPlacement * horizontalUnit).toFixed(2).toString()}%`,
+					top: `${(yPlacement * verticalUnit).toFixed(2).toString()}%`
+				};
+			};
+
+			this.setStyle(heightIn, widthIn, xPlacementIn, yPlacementIn);
 		};
 
-		this.state = this.initialState;
+		this.state = {
+			layoutGrid: []
+		};
+
+		this.initialGrid = [];
+
+		for (let i = 0;i < this.columns;i++) {
+			this.state.layoutGrid.push([]);
+			this.initialGrid.push([]);
+			for (let j = 0;j < this.rows;j++) {
+				this.state.layoutGrid[i].push(new this.createPanel(verticalUnit, horizontalUnit, i, j));
+				this.initialGrid[i].push(new this.createPanel(verticalUnit, horizontalUnit, i, j));
+			}
+		}
 	}
 	render() {
 		return (
-			<div className={styles.layout}>
-				<div className={this.state.leftCol} >
-					<div className={this.state.topRow}></div>
-					<div className={styles.middleRow} onClick={() => this.openSide(...this.leftParams)}>
-					</div>
-					<div className={this.state.bottomRow}></div>
-				</div>
-
-				<div className={styles.centerCol}>
-					<div className={this.state.topRow} onClick={() => this.openSide(...this.topParams)}>
-					</div>
-					<div className={styles.middleRow} onClick={this.centerClick}></div>
-					<div className={this.state.bottomRow} onClick={() => this.openSide(...this.bottomParams)}>
-						<PageSettings updateBackground={this.props.updateBackground} closeFn={() => this.closeSide(...this.bottomParams)}/>
-					</div>
-				</div>
-
-				<div className={this.state.rightCol}>
-					<div className={this.state.topRow}></div>
-					<div className={styles.middleRow} onClick={() => this.openSide(...this.rightParams)}>
-					</div>
-					<div className={this.state.bottomRow}></div>
+			<div>
+				<button type="button" onClick={this.close}></button>
+				<div className={styles.layout}>
+					{this.state.layoutGrid.map((column, columnIndex) => {
+						return column.map((panel, rowIndex) => {
+							return <div style={this.state.layoutGrid[columnIndex][rowIndex].style} className={styles.panel} onClick={() => {this.panelClick(panel, columnIndex, rowIndex)}}></div>;
+						})
+					})}	
 				</div>
 			</div>
 		);
 	};
-	openSide = (side, oppSide, expandStyle, closeStyle) => {
-		let sideStyle = styles[side] + ' ' + styles[expandStyle];
-		let oppSideStyle = styles[oppSide] + ' ' + styles[closeStyle];
+	panelClick = (panel, targetColumn, targetRow) => {
+		let layoutGrid = [];
 
-		if (this.state[side] === sideStyle) {
-			return;
-		}
+		this.state.layoutGrid.map((column, columnIndex) => {
+			layoutGrid.push([]);
+			column.map((panel, rowIndex) => {
+				let colTargetDist = columnIndex - targetColumn;
+				let rowTargetDist = rowIndex - targetRow;
+				
+				layoutGrid[columnIndex][rowIndex] = new this.createPanel(100, 100, (colTargetDist * this.columns), (rowTargetDist * this.rows));
+			});
+		});
 
-		this.setState({[side]: sideStyle, [oppSide]: oppSideStyle});
+		this.setState({layoutGrid});
 	};
-	closeSide = (side, oppSide, expandStyle, closeStyle) => {
-		let sideStyle = styles[side] + ' ' + styles[closeStyle];
+	close = () => {
+		let layoutGrid = this.state.layoutGrid;
 
-		this.setState({[side]: sideStyle})
+		layoutGrid.map((column, columnIndex) => {
+			column.map((panel, rowIndex) => {
+				layoutGrid[columnIndex][rowIndex] = Object.assign({}, this.initialGrid[columnIndex][rowIndex]);
+			});
+		});
+
+		this.setState({layoutGrid});
+		this.forceUpdate();
 	};
-	centerClick = () => {
-		this.setState(this.initialState);
-	}
 } 
