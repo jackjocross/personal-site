@@ -6,14 +6,47 @@
 	overflow: hidden;
 }
 
+.header {
+	position: absolute;
+	height: 10%;
+	width: 100%;
+	border-style: solid;
+	border-color: white;
+	border-width: 0 0 2px 0;
+	box-sizing: border-box;
+}
+
 .panel {
 	position: absolute;
 	border-style: solid;
+	border-color: white;
+	border-width: 1px 1px 1px 1px;
 	box-sizing: border-box;
 
-	-webkit-transition: all 500ms ease-in-out;
-    -moz-transition: all 500ms ease-in-out;
-    -o-transition: all 500ms ease-in-out;
-    -ms-transition: all 500ms ease-in-out;    
-    transition: all 500ms ease-in-out;
+	-webkit-transition: all 500ms cubic-bezier(.6,0,.4,1);
+    -moz-transition: all 500ms cubic-bezier(.6,0,.4,1);
+    -o-transition: all 500ms cubic-bezier(.6,0,.4,1);
+    -ms-transition: all 500ms cubic-bezier(.6,0,.4,1);    
+    transition: all 500ms cubic-bezier(.6,0,.4,1);
 }
+
+.clearBorder {
+	border: transparent;
+}
+
+.clearBorderTop {
+	border-top: transparent;
+}
+
+.clearBorderRight {
+	border-right: transparent;
+}
+
+.clearBorderBottom {
+	border-bottom: transparent;
+}
+
+.clearBorderLeft {
+	border-left: transparent;
+}
+
