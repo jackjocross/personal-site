@@ -15,7 +15,12 @@ export default class App extends React.Component {
 		return (
 			<div className={styles.container}>
 				<Background hue={this.state.backgroundHue} />
-				<Layout updateBackground={this.updateBackground}/>
+				<Layout updateBackground={this.updateBackground}>
+					<div>About Me</div>
+					<div>Work</div>
+					<div>Resume</div>
+					<div>Contact</div>
+				</Layout>
 			</div>
 		);
 	};
