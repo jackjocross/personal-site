@@ -21,10 +21,10 @@ export default class Panel {
 		}
 
 		this.style = {
-			height: `${height.toFixed(2).toString()}%`,
-			width: `${width.toFixed(2).toString()}%`,
-			left: `${(xPlacement * Panel.horizontalUnit).toFixed(2).toString()}%`,
-			top: `${(yPlacement * Panel.verticalUnit).toFixed(2).toString()}%`
+			height: `${height.toString()}%`,
+			width: `${width.toString()}%`,
+			left: `${(xPlacement * Panel.horizontalUnit).toString()}%`,
+			top: `${(yPlacement * Panel.verticalUnit).toString()}%`
 		};
 	}
 	static setDimensions(columns, rows, horizontalUnit, verticalUnit) {
@@ -63,9 +63,8 @@ export default class Layout extends React.Component {
 			this.state.layoutGrid.push([]);
 			this.initialGrid.push([]);
 			for (let j = 0;j < this.columns;j++) {
-				console.log(this.verticalUnit, this.horizontalUnit);
-				this.state.layoutGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, i, j));
-				this.initialGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, i, j));
+				this.state.layoutGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j, i));
+				this.initialGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j, i));
 			}
 		}
 	}
@@ -79,9 +78,15 @@ export default class Layout extends React.Component {
 				<div className={styles.layout}>
 					{this.state.layoutGrid.map((row, rowIndex) => {
 						return row.map((panel, columnIndex) => {
+							let child = this.childrenArr[columnIndex + this.columns * rowIndex];
+							let childWithProps = React.cloneElement(child, {
+								doSomething: 'do something'
+							});
 							return (
-								<div style={this.state.layoutGrid[columnIndex][rowIndex].style} className={this.state.layoutGrid[columnIndex][rowIndex].panelClass} onClick={() => {this.panelClick(panel, columnIndex, rowIndex)}}>
-									{this.childrenArr[columnIndex + this.columns * rowIndex]}
+								<div style={this.state.layoutGrid[rowIndex][columnIndex].style} 
+									className={this.state.layoutGrid[rowIndex][columnIndex].panelClass} 
+									onClick={() => {this.panelClick(panel, child, columnIndex, rowIndex)}}>
+									{childWithProps}
 								</div>
 							);
 						})
@@ -90,18 +95,22 @@ export default class Layout extends React.Component {
 			</div>
 		);
 	};
-	panelClick = (panel, targetColumn, targetRow) => {
+	panelClick = (panel, child, targetColumn, targetRow) => {
+		if (typeof child === 'undefined') {
+			return;
+		}
+
 		let layoutGrid = [];
 
-		this.state.layoutGrid.map((column, columnIndex) => {
+		this.state.layoutGrid.map((row, rowIndex) => {
 			layoutGrid.push([]);
-			column.map((panel, rowIndex) => {
+			row.map((panel, columnIndex) => {
 				let colTargetDist = columnIndex - targetColumn;
 				let rowTargetDist = rowIndex - targetRow;
 
 				let isTarget = targetColumn === columnIndex && targetRow === rowIndex ? true : false;
 
-				layoutGrid[columnIndex][rowIndex] = new Panel(100, 100, (colTargetDist * this.columns), (rowTargetDist * this.rows), isTarget);
+				layoutGrid[rowIndex][columnIndex] = new Panel(100, 100, (colTargetDist * this.columns), (rowTargetDist * this.rows), isTarget);
 			});
 		});
 
