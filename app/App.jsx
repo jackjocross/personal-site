@@ -1,6 +1,7 @@
 import React from 'react';
 import Background from './Background.jsx';
 import Layout from './Layout.jsx';
+import About from './About.jsx';
 import styles from './app.css';
 
 export default class App extends React.Component {
@@ -15,7 +16,12 @@ export default class App extends React.Component {
 		return (
 			<div className={styles.container}>
 				<Background hue={this.state.backgroundHue} />
-				<Layout updateBackground={this.updateBackground}/>
+				<Layout updateBackground={this.updateBackground}>
+					<About />
+					<div>Work</div>
+					<div>Resume</div>
+					<div>Contact</div>
+				</Layout>
 			</div>
 		);
 	};
@@ -23,4 +29,4 @@ export default class App extends React.Component {
 		const backgroundHue = Math.floor(Math.random() * 360);
 		this.setState({backgroundHue});
 	};
-} 
+}

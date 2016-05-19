@@ -1,72 +1,130 @@
 import React from 'react';
-import PageSettings from './PageSettings.jsx';
 import styles from './layout.css';
 
+export default class Panel {
+	constructor(height, width, xPlacement, yPlacement, target) {
+		this.panelClass = styles.panel;
+		if (xPlacement === 0) {
+			this.panelClass += ' ' + styles.clearBorderLeft;
+		} else if (xPlacement === Panel.columns - 1) {
+			this.panelClass += ' ' + styles.clearBorderRight;
+		} 
+
+		if (yPlacement === 0) {
+			this.panelClass += ' ' + styles.clearBorderTop;
+		} else if (yPlacement === Panel.rows - 1) {
+			this.panelClass += ' ' + styles.clearBorderBottom;
+		}
+
+		if (target) {
+			this.panelClass += ' ' + styles.clearBorder;
+		}
+
+		this.style = {
+			height: `${height.toString()}%`,
+			width: `${width.toString()}%`,
+			left: `${(xPlacement * Panel.horizontalUnit).toString()}%`,
+			top: `${(yPlacement * Panel.verticalUnit).toString()}%`
+		};
+	}
+	static setDimensions(columns, rows, horizontalUnit, verticalUnit) {
+		this.columns = columns,
+		this.rows = rows, 
+		this.horizontalUnit = horizontalUnit,
+		this.verticalUnit = verticalUnit;
+	}
+}
+
 export default class Layout extends React.Component {
-	
-
-
 	constructor(props) {
 		super(props);
+	
+		this.childrenArr = React.Children.toArray(this.props.children);
 
-		this.leftParams = ['leftCol', 'rightCol', 'expandWidth', 'closeWidth'];
-		this.rightParams = ['rightCol', 'leftCol', 'expandWidth', 'closeWidth'];
-		this.topParams = ['topRow', 'bottomRow', 'expandHeight', 'closeHeight'];
-		this.bottomParams = ['bottomRow', 'topRow', 'expandHeight', 'closeHeight'];
+		let sqrt = Math.sqrt(React.Children.count(this.props.children));
+		let roundedSqrt = Math.round(sqrt);
 
-		this.initialState = {
-			leftCol: styles.leftCol + ' ' + styles.closeWidth,
-			topRow: styles.topRow + ' ' + styles.closeHeight,
-			bottomRow: styles.bottomRow + ' ' + styles.closeHeight,
-			rightCol: styles.rightCol + ' ' + styles.closeWidth
+		this.columns = roundedSqrt
+		this.rows = sqrt > roundedSqrt ? roundedSqrt + 1 : roundedSqrt;
+
+		this.horizontalUnit = 100 / this.columns;
+		this.verticalUnit = 100 / this.rows;
+
+		Panel.setDimensions(this.columns, this.rows, this.horizontalUnit, this.verticalUnit);
+
+		this.state = {
+			layoutGrid: []
 		};
 
-		this.state = this.initialState;
+		this.initialGrid = [];
+		
+		// Create initialGrid and layoutGrid of panels
+		for (let i = 0;i < this.rows;i++) {
+			this.state.layoutGrid.push([]);
+			this.initialGrid.push([]);
+			for (let j = 0;j < this.columns;j++) {
+				this.state.layoutGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j, i));
+				this.initialGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j, i));
+			}
+		}
 	}
 	render() {
 		return (
-			<div className={styles.layout}>
-				<div className={this.state.leftCol} >
-					<div className={this.state.topRow}></div>
-					<div className={styles.middleRow} onClick={() => this.openSide(...this.leftParams)}>
-					</div>
-					<div className={this.state.bottomRow}></div>
+			<div>
+				<div className={styles.header}>
+					<button type="button" onClick={this.close}>Back</button>
+					<button type="button" onClick={this.props.updateBackground}>Update background color</button>
 				</div>
-
-				<div className={styles.centerCol}>
-					<div className={this.state.topRow} onClick={() => this.openSide(...this.topParams)}>
-					</div>
-					<div className={styles.middleRow} onClick={this.centerClick}></div>
-					<div className={this.state.bottomRow} onClick={() => this.openSide(...this.bottomParams)}>
-						<PageSettings updateBackground={this.props.updateBackground} closeFn={() => this.closeSide(...this.bottomParams)}/>
-					</div>
-				</div>
-
-				<div className={this.state.rightCol}>
-					<div className={this.state.topRow}></div>
-					<div className={styles.middleRow} onClick={() => this.openSide(...this.rightParams)}>
-					</div>
-					<div className={this.state.bottomRow}></div>
+				<div className={styles.layout}>
+					{this.state.layoutGrid.map((row, rowIndex) => {
+						return row.map((panel, columnIndex) => {
+							let child = this.childrenArr[columnIndex + this.columns * rowIndex];
+							let childWithProps = React.cloneElement(child, {
+								doSomething: 'do something'
+							});
+							return (
+								<div style={this.state.layoutGrid[rowIndex][columnIndex].style} 
+									className={this.state.layoutGrid[rowIndex][columnIndex].panelClass} 
+									onClick={() => {this.panelClick(panel, child, columnIndex, rowIndex)}}>
+									{childWithProps}
+								</div>
+							);
+						})
+					})}
 				</div>
 			</div>
 		);
 	};
-	openSide = (side, oppSide, expandStyle, closeStyle) => {
-		let sideStyle = styles[side] + ' ' + styles[expandStyle];
-		let oppSideStyle = styles[oppSide] + ' ' + styles[closeStyle];
-
-		if (this.state[side] === sideStyle) {
+	panelClick = (panel, child, targetColumn, targetRow) => {
+		if (typeof child === 'undefined') {
 			return;
 		}
 
-		this.setState({[side]: sideStyle, [oppSide]: oppSideStyle});
-	};
-	closeSide = (side, oppSide, expandStyle, closeStyle) => {
-		let sideStyle = styles[side] + ' ' + styles[closeStyle];
+		let layoutGrid = [];
 
-		this.setState({[side]: sideStyle})
+		this.state.layoutGrid.map((row, rowIndex) => {
+			layoutGrid.push([]);
+			row.map((panel, columnIndex) => {
+				let colTargetDist = columnIndex - targetColumn;
+				let rowTargetDist = rowIndex - targetRow;
+
+				let isTarget = targetColumn === columnIndex && targetRow === rowIndex ? true : false;
+
+				layoutGrid[rowIndex][columnIndex] = new Panel(100, 100, (colTargetDist * this.columns), (rowTargetDist * this.rows), isTarget);
+			});
+		});
+
+		this.setState({layoutGrid});
 	};
-	centerClick = () => {
-		this.setState(this.initialState);
-	}
+	close = () => {
+		let layoutGrid = this.state.layoutGrid;
+
+		layoutGrid.map((column, columnIndex) => {
+			column.map((panel, rowIndex) => {
+				layoutGrid[columnIndex][rowIndex] = Object.create(this.initialGrid[columnIndex][rowIndex]);
+			});
+		});
+
+		this.setState({layoutGrid});
+	};
 } 
