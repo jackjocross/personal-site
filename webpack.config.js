@@ -10,6 +10,7 @@ const pkg = require('./package.json');
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
   app: path.join(__dirname, 'app'),
+  assets: path.join(__dirname, 'assets'),
   build: path.join(__dirname, 'build'),
 };
 const ENV = {
@@ -36,6 +37,11 @@ const common = {
         test: /\.jsx?$/,
         loaders: ['babel?cacheDirectory'],
         include: PATHS.app
+      },
+      {
+        test: /\.woff?$/,
+        loader: 'file',
+        include: PATHS.assets
       }
     ]
   },
@@ -44,7 +50,8 @@ const common = {
       template: 'node_modules/html-webpack-template/index.ejs',
       title: 'Personal site',
       appMountId: 'app',
-      inject: false
+      inject: false,
+      mobile: true
     })
   ]
 };

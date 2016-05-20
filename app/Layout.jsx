@@ -26,6 +26,8 @@ export default class Panel {
 			left: `${(xPlacement * Panel.horizontalUnit).toString()}%`,
 			top: `${(yPlacement * Panel.verticalUnit).toString()}%`
 		};
+
+		this.isTarget = target;
 	}
 	static setDimensions(columns, rows, horizontalUnit, verticalUnit) {
 		this.columns = columns,
@@ -44,7 +46,7 @@ export default class Layout extends React.Component {
 		let sqrt = Math.sqrt(React.Children.count(this.props.children));
 		let roundedSqrt = Math.round(sqrt);
 
-		this.columns = roundedSqrt
+		this.columns = roundedSqrt;
 		this.rows = sqrt > roundedSqrt ? roundedSqrt + 1 : roundedSqrt;
 
 		this.horizontalUnit = 100 / this.columns;
@@ -63,8 +65,8 @@ export default class Layout extends React.Component {
 			this.state.layoutGrid.push([]);
 			this.initialGrid.push([]);
 			for (let j = 0;j < this.columns;j++) {
-				this.state.layoutGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j, i));
-				this.initialGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j, i));
+				this.state.layoutGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j, i, false));
+				this.initialGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j, i, false));
 			}
 		}
 	}
@@ -80,7 +82,7 @@ export default class Layout extends React.Component {
 						return row.map((panel, columnIndex) => {
 							let child = this.childrenArr[columnIndex + this.columns * rowIndex];
 							let childWithProps = React.cloneElement(child, {
-								doSomething: 'do something'
+								isTarget: this.state.layoutGrid[rowIndex][columnIndex].isTarget
 							});
 							return (
 								<div style={this.state.layoutGrid[rowIndex][columnIndex].style} 

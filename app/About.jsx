@@ -2,22 +2,19 @@ import React from 'react';
 import styles from './about.css';
 
 export default class About extends React.Component {
-	constructor(props) {
-		super(props);
-
-		console.log(props.doSomething);
-	}
 	render() {
-		if (true) {
-			return this.renderIcon();
-		} else {
+		let {isTarget} = this.props;
+
+		if (isTarget) {
 			return this.renderContent();
+		} else {
+			return this.renderIcon();
 		}
 	}
 	renderIcon = () => {
 		return (
 			<div className={styles.container}>
-				Icon
+				Icon &#xe9e1;
 			</div>
 		);
 	};

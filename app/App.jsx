@@ -21,6 +21,7 @@ export default class App extends React.Component {
 					<div>Work</div>
 					<div>Resume</div>
 					<div>Contact</div>
+					
 				</Layout>
 			</div>
 		);
