@@ -55,7 +55,9 @@ export default class Layout extends React.Component {
 		Panel.setDimensions(this.columns, this.rows, this.horizontalUnit, this.verticalUnit);
 
 		this.state = {
-			layoutGrid: []
+			layoutGrid: [],
+			backClear: true,
+			backHidden: true
 		};
 
 		this.initialGrid = [];
@@ -71,18 +73,45 @@ export default class Layout extends React.Component {
 		}
 	}
 	render() {
+		let backArrowContainerStyle = styles.backArrowContainer;
+		if (this.state.backClear) {
+			backArrowContainerStyle += ' ' + styles.backArrowClear;
+		}
+
 		return (
 			<div>
 				<div className={styles.header}>
-					<button type="button" onClick={this.close}>Back</button>
-					<button type="button" onClick={this.props.updateBackground}>Update background color</button>
+					<div className={backArrowContainerStyle} onClick={this.close}>
+						<svg className={styles.backArrow} viewBox="0 0 32 32">
+							<defs xmlns="http://www.w3.org/2000/svg">
+								<filter id="dropshadow" width="140%" height="140%">
+								<feGaussianBlur in="SourceAlpha" stdDeviation="3"/> 
+								<feOffset dx="2" dy="2" result="offsetblur"/>
+								<feComponentTransfer>
+									<feFuncA type="linear" slope="0.2"/>
+								</feComponentTransfer>
+								<feMerge> 
+									<feMergeNode/>
+									<feMergeNode in="SourceGraphic"/> 
+								</feMerge>
+								</filter>
+							</defs>
+							<path d="M12.586 27.414l-10-10c-0.781-0.781-0.781-2.047 0-2.828l10-10c0.781-0.781 2.047-0.781 2.828 0s0.781 2.047 0 2.828l-6.586 6.586h19.172c1.105 0 2 0.895 2 2s-0.895 2-2 2h-19.172l6.586 6.586c0.39 0.39 0.586 0.902 0.586 1.414s-0.195 1.024-0.586 1.414c-0.781 0.781-2.047 0.781-2.828 0z"></path>
+						</svg>
+					</div>
+					<div className={styles.updateBackgroundContainer} onClick={this.props.updateBackground} >
+						<svg className={styles.updateBackground} viewBox="0 0 32 32">
+							<path d="M24 22h-3.172l-5-5 5-5h3.172v5l7-7-7-7v5h-4c-0.53 0-1.039 0.211-1.414 0.586l-5.586 5.586-5.586-5.586c-0.375-0.375-0.884-0.586-1.414-0.586h-6v4h5.172l5 5-5 5h-5.172v4h6c0.53 0 1.039-0.211 1.414-0.586l5.586-5.586 5.586 5.586c0.375 0.375 0.884 0.586 1.414 0.586h4v5l7-7-7-7v5z"></path>
+						</svg>
+					</div>
+
 				</div>
 				<div className={styles.layout}>
 					{this.state.layoutGrid.map((row, rowIndex) => {
 						return row.map((panel, columnIndex) => {
 							let child = this.childrenArr[columnIndex + this.columns * rowIndex];
 							let childWithProps = React.cloneElement(child, {
-								isTarget: this.state.layoutGrid[rowIndex][columnIndex].isTarget
+								isTarget: this.state.layoutGrid[rowIndex][columnIndex].isTarget,
 							});
 							return (
 								<div style={this.state.layoutGrid[rowIndex][columnIndex].style} 
@@ -102,7 +131,9 @@ export default class Layout extends React.Component {
 			return;
 		}
 
-		let layoutGrid = [];
+		let layoutGrid = [], 
+			backClear = false,
+			backHidden = false;
 
 		this.state.layoutGrid.map((row, rowIndex) => {
 			layoutGrid.push([]);
@@ -116,10 +147,11 @@ export default class Layout extends React.Component {
 			});
 		});
 
-		this.setState({layoutGrid});
+		this.setState({layoutGrid, backClear, backHidden});
 	};
 	close = () => {
-		let layoutGrid = this.state.layoutGrid;
+		let layoutGrid = this.state.layoutGrid,
+			backClear = true;
 
 		layoutGrid.map((column, columnIndex) => {
 			column.map((panel, rowIndex) => {
@@ -127,6 +159,15 @@ export default class Layout extends React.Component {
 			});
 		});
 
-		this.setState({layoutGrid});
+		// Hide the back button after animation
+		setTimeout(() => {
+			this.hideClose();
+		}, 500);
+
+		this.setState({layoutGrid, backClear});
 	};
+	hideClose = () => {
+		let backHidden = true;
+		this.setState({backHidden});
+	}
 } 

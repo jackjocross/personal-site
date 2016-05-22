@@ -1,0 +1,15 @@
+.contentContainer {
+	opacity: 1;
+	font-family: arial;
+    font-weight: bolder;
+    color: whitesmoke;
+    font-size: larger;
+    padding: 0 3%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hidden {
+	opacity: 0;
+}

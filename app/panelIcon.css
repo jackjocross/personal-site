@@ -1,0 +1,60 @@
+.iconContainer {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	font-size: 18px;
+	fill: white;
+	cursor: pointer;
+}
+
+.iconContainer:hover path, .iconContainer:hover text {
+	filter: url(#dropshadow);
+}
+
+.iconText {
+	font-family: arial;
+    font-weight: bolder;
+    font-size: larger;
+
+    user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+.iconTextContainer {
+	position: absolute;
+    top: 50%;
+    margin-top: 5%;
+    width: 50%;
+    height: auto;
+    text-anchor: middle;
+    overflow: visible;
+    left: 50%;
+    margin-left: -25%;
+}
+
+.panelIcon {
+	height: auto;
+	left: 50%;
+	margin-left: -10%;
+	margin-top: -18%;
+	overflow: visible;
+	position: absolute;
+    top: 50%;
+    width: 20%;
+}
+
+@media (min-width: 620px) {
+	.panelIcon {
+		margin-left: -30.9px;
+		margin-top: -55px;
+		width: 61.8px;
+	}
+
+	.iconTextContainer {
+		margin-left: -77.2px;
+		margin-top: 15px;
+		width: 154.5px;
+	}
+}

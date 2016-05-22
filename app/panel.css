@@ -1,0 +1,46 @@
+.iconContainer {
+	display: inline-block;
+	width: 100%;
+	font-size: 18px;
+	height: 100%;
+	fill: white;
+}
+
+.iconText {
+	font-family: arial;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.iconTextContainer {
+	width: 80%;
+	margin: 0 10%;
+}
+
+.panelIcon {
+	margin: 30% 30% 5%;
+    width: 40%;
+    height: auto;
+}
+
+.contentContainer {
+	opacity: 1;
+	font-family: arial;
+    font-weight: bolder;
+    color: whitesmoke;
+    font-size: larger;
+    padding: 0 3%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+
+    -webkit-transition: opacity 500ms cubic-bezier(.6,0,.4,1);
+    -moz-transition: opacity 500ms cubic-bezier(.6,0,.4,1);
+    -o-transition: opacity 500ms cubic-bezier(.6,0,.4,1);
+    -ms-transition: opacity 500ms cubic-bezier(.6,0,.4,1);    
+    transition: opacity 500ms cubic-bezier(.6,0,.4,1);
+}
+
+.hidden {
+	opacity: 0;
+}
