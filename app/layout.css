@@ -73,12 +73,11 @@
 	position: absolute;
 	border-style: solid;
 	border-color: white;
-	border-width: 1px 1px 1px 1px;
+	border-width: 2px 2px 2px 2px;
 	box-sizing: border-box;
 	overflow-y: scroll;
 	height: 100%;
 	width: 100%;
-	transform: scale(0.5);
 
 	/*-webkit-transition: all 500ms linear;
     -moz-transition: all 500ms linear;
