@@ -20,11 +20,12 @@ export default class Panel {
 			this.panelClass += ' ' + styles.clearBorder;
 		}
 
+		let scale = .5;
+		console.log(scale);
+		console.log(xPlacement, yPlacement);
+
 		this.style = {
-			height: `${height.toString()}%`,
-			width: `${width.toString()}%`,
-			left: `${(xPlacement * Panel.horizontalUnit).toString()}%`,
-			top: `${(yPlacement * Panel.verticalUnit).toString()}%`
+			transform: `scale(${scale.toString()}) translate3d(${(xPlacement * 100).toString()}%,${(yPlacement * 100).toString()}%, 0)`,
 		};
 
 		this.isTarget = target;

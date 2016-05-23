@@ -76,12 +76,21 @@
 	border-width: 1px 1px 1px 1px;
 	box-sizing: border-box;
 	overflow-y: scroll;
+	height: 100%;
+	width: 100%;
+	transform: scale(0.5);
 
-	-webkit-transition: all 500ms cubic-bezier(.6,0,.4,1);
-    -moz-transition: all 500ms cubic-bezier(.6,0,.4,1);
-    -o-transition: all 500ms cubic-bezier(.6,0,.4,1);
-    -ms-transition: all 500ms cubic-bezier(.6,0,.4,1);    
-    transition: all 500ms cubic-bezier(.6,0,.4,1);
+	/*-webkit-transition: all 500ms linear;
+    -moz-transition: all 500ms linear;
+    -o-transition: all 500ms linear;
+    -ms-transition: all 500ms linear;    
+    transition: all 500ms linear;*/
+
+	-webkit-transition: transform 500ms cubic-bezier(.6,0,.4,1), height 500ms cubic-bezier(.6,0,.4,1), width 500ms cubic-bezier(.6,0,.4,1);
+    -moz-transition: transform 500ms cubic-bezier(.6,0,.4,1), height 500ms cubic-bezier(.6,0,.4,1), width 500ms cubic-bezier(.6,0,.4,1);
+    -o-transition: transform 500ms cubic-bezier(.6,0,.4,1), height 500ms cubic-bezier(.6,0,.4,1), width 500ms cubic-bezier(.6,0,.4,1);
+    -ms-transition: transform 500ms cubic-bezier(.6,0,.4,1), height 500ms cubic-bezier(.6,0,.4,1), width 500ms cubic-bezier(.6,0,.4,1);   
+    transition: transform 500ms cubic-bezier(.6,0,.4,1), height 500ms cubic-bezier(.6,0,.4,1), width 500ms cubic-bezier(.6,0,.4,1);
 }
 
 .clearBorder {
