@@ -20,14 +20,26 @@ export default class Panel {
 			this.panelClass += ' ' + styles.clearBorder;
 		}
 
+		let xTemp = xPlacement - (Panel.columns - 1) / 2;
+		if (xTemp > 0) {
+			xTemp = Math.ceil(xTemp);
+		} else {
+			xTemp = Math.floor(xTemp);
+		}
+
+		let yTemp = yPlacement - (Panel.rows - 1) / 2;
+		if (yTemp > 0) {
+			yTemp = Math.ceil(yTemp);
+		} else {
+			yTemp = Math.floor(yTemp);
+		}
+
 		let scale = height / 100;
-		let xPercentage = (1 / Panel.columns) * 100;
-		let yPercentage = (1 / Panel.rows) * 100;
-		console.log(scale);
-		console.log(xPlacement, yPlacement);
+
+		console.log(xTemp, xPlacement, yTemp, yPlacement)
 
 		this.style = {
-			transform: `scale(${scale.toString()}) translate3d(${(xPlacement * xPercentage).toString()}%,${(yPlacement * yPercentage).toString()}%, 0)`,
+			transform: `scale(${scale.toString()}) translate3d(${(xTemp * 100 + height).toString()}%,${(yTemp * 100 + width).toString()}%, 0)`,
 		};
 
 		this.isTarget = target;
@@ -70,22 +82,9 @@ export default class Layout extends React.Component {
 			this.state.layoutGrid.push([]);
 			this.initialGrid.push([]);
 			for (let j = 0;j < this.columns;j++) {
-				let xTemp = j - (this.columns - 1) / 2;
-				if (xTemp > 0) {
-					xTemp = Math.ceil(xTemp);
-				} else {
-					xTemp = Math.floor(xTemp);
-				}
 
-				let yTemp = i - (this.rows - 1) / 2;
-				if (yTemp > 0) {
-					yTemp = Math.ceil(yTemp);
-				} else {
-					yTemp = Math.floor(yTemp);
-				}
-
-				this.state.layoutGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, xTemp, yTemp, false));
-				this.initialGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, xTemp, yTemp, false));
+				this.state.layoutGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j * Panel.horizontalUnit / 100, i * Panel.verticalUnit / 100, false));
+				this.initialGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j * Panel.horizontalUnit / 100, i * Panel.verticalUnit / 100, false));
 			}
 		}
 	}
@@ -160,7 +159,7 @@ export default class Layout extends React.Component {
 
 				let isTarget = targetColumn === columnIndex && targetRow === rowIndex ? true : false;
 
-				layoutGrid[rowIndex][columnIndex] = new Panel(100, 100, (colTargetDist * this.columns), (rowTargetDist * this.rows), isTarget);
+				layoutGrid[rowIndex][columnIndex] = new Panel(100, 100, colTargetDist, rowTargetDist, isTarget);
 			});
 		});
 

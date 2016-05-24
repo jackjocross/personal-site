@@ -8,6 +8,14 @@
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
+
+}
+
+.scrollableContainer {
+	overflow-y: scroll;
+
+	height: 100%;
+	width: 100%;
 }
 
 .hidden {
