@@ -1,57 +1,6 @@
 import React from 'react';
 import styles from './layout.css';
 
-export default class Panel {
-	constructor(height, width, xPlacement, yPlacement, target) {
-		this.panelClass = styles.panel;
-		if (xPlacement === 0) {
-			this.panelClass += ' ' + styles.clearBorderLeft;
-		} else if (xPlacement === Panel.columns - 1) {
-			this.panelClass += ' ' + styles.clearBorderRight;
-		} 
-
-		if (yPlacement === 0) {
-			this.panelClass += ' ' + styles.clearBorderTop;
-		} else if (yPlacement === Panel.rows - 1) {
-			this.panelClass += ' ' + styles.clearBorderBottom;
-		}
-
-		if (target) {
-			this.panelClass += ' ' + styles.clearBorder;
-		}
-
-		let xTemp = xPlacement - (Panel.columns - 1) / 2;
-		if (xTemp > 0) {
-			xTemp = Math.ceil(xTemp);
-		} else {
-			xTemp = Math.floor(xTemp);
-		}
-
-		let yTemp = yPlacement - (Panel.rows - 1) / 2;
-		if (yTemp > 0) {
-			yTemp = Math.ceil(yTemp);
-		} else {
-			yTemp = Math.floor(yTemp);
-		}
-
-		let scale = height / 100;
-
-		console.log(xTemp, xPlacement, yTemp, yPlacement)
-
-		this.style = {
-			transform: `scale(${scale.toString()}) translate3d(${(xTemp * 100 + height).toString()}%,${(yTemp * 100 + width).toString()}%, 0)`,
-		};
-
-		this.isTarget = target;
-	}
-	static setDimensions(columns, rows, horizontalUnit, verticalUnit) {
-		this.columns = columns,
-		this.rows = rows, 
-		this.horizontalUnit = horizontalUnit,
-		this.verticalUnit = verticalUnit;
-	}
-}
-
 export default class Layout extends React.Component {
 	constructor(props) {
 		super(props);
@@ -61,32 +10,14 @@ export default class Layout extends React.Component {
 		let sqrt = Math.sqrt(React.Children.count(this.props.children));
 		let roundedSqrt = Math.round(sqrt);
 
-		this.columns = roundedSqrt;
-		this.rows = sqrt > roundedSqrt ? roundedSqrt + 1 : roundedSqrt;
-
-		this.horizontalUnit = 100 / this.columns;
-		this.verticalUnit = 100 / this.rows;
-
-		Panel.setDimensions(this.columns, this.rows, this.horizontalUnit, this.verticalUnit);
+		this.size = roundedSqrt;
 
 		this.state = {
-			layoutGrid: [],
 			backClear: true,
-			backHidden: true
+			backHidden: true,
+			clickedColumn: null,
+			clickedRow: null
 		};
-
-		this.initialGrid = [];
-		
-		// Create initialGrid and layoutGrid of panels
-		for (let i = 0;i < this.rows;i++) {
-			this.state.layoutGrid.push([]);
-			this.initialGrid.push([]);
-			for (let j = 0;j < this.columns;j++) {
-
-				this.state.layoutGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j * Panel.horizontalUnit / 100, i * Panel.verticalUnit / 100, false));
-				this.initialGrid[i].push(new Panel(this.verticalUnit, this.horizontalUnit, j * Panel.horizontalUnit / 100, i * Panel.verticalUnit / 100, false));
-			}
-		}
 	}
 	render() {
 		let backArrowContainerStyle = styles.backArrowContainer;
@@ -123,64 +54,37 @@ export default class Layout extends React.Component {
 
 				</div>
 				<div className={styles.layout}>
-					{this.state.layoutGrid.map((row, rowIndex) => {
-						return row.map((panel, columnIndex) => {
-							let child = this.childrenArr[columnIndex + this.columns * rowIndex];
+					{ this.childrenArr.map((child, childIndex) => {
+							if (typeof child === 'undefined') return;
 							let childWithProps = React.cloneElement(child, {
-								isTarget: this.state.layoutGrid[rowIndex][columnIndex].isTarget,
+								column: childIndex % this.size, 
+								row: Math.floor(childIndex / this.size),
+								size: this.size,
+								clickedColumn: this.state.clickedColumn, 
+								clickedRow: this.state.clickedRow,
+								panelClick: this.panelClick
 							});
-							return (
-								<div style={this.state.layoutGrid[rowIndex][columnIndex].style} 
-									className={this.state.layoutGrid[rowIndex][columnIndex].panelClass} 
-									onClick={() => {this.panelClick(panel, child, columnIndex, rowIndex)}}>
-									{childWithProps}
-								</div>
-							);
-						})
+							return childWithProps;
 					})}
 				</div>
 			</div>
 		);
 	};
-	panelClick = (panel, child, targetColumn, targetRow) => {
-		if (typeof child === 'undefined') {
-			return;
-		}
-
-		let layoutGrid = [], 
-			backClear = false,
-			backHidden = false;
-
-		this.state.layoutGrid.map((row, rowIndex) => {
-			layoutGrid.push([]);
-			row.map((panel, columnIndex) => {
-				let colTargetDist = columnIndex - targetColumn;
-				let rowTargetDist = rowIndex - targetRow;
-
-				let isTarget = targetColumn === columnIndex && targetRow === rowIndex ? true : false;
-
-				layoutGrid[rowIndex][columnIndex] = new Panel(100, 100, colTargetDist, rowTargetDist, isTarget);
-			});
-		});
-
-		this.setState({layoutGrid, backClear, backHidden});
+	panelClick = (clickedColumn, clickedRow) => {
+		let backClear = false;
+		this.setState({clickedColumn, clickedRow, backClear});
 	};
 	close = () => {
-		let layoutGrid = this.state.layoutGrid,
-			backClear = true;
-
-		layoutGrid.map((column, columnIndex) => {
-			column.map((panel, rowIndex) => {
-				layoutGrid[columnIndex][rowIndex] = Object.create(this.initialGrid[columnIndex][rowIndex]);
-			});
-		});
-
 		// Hide the back button after animation
 		setTimeout(() => {
 			this.hideClose();
 		}, 500);
 
-		this.setState({layoutGrid, backClear});
+		let clickedColumn = null,
+			clickedRow = null,
+			backClear = true;
+
+		this.setState({clickedColumn, clickedRow, backClear});
 	};
 	hideClose = () => {
 		let backHidden = true;
