@@ -69,38 +69,3 @@
 	overflow: visible;
 }
 
-.panel {
-	position: absolute;
-	border-style: solid;
-	border-color: white;
-	border-width: 1px 1px 1px 1px;
-	box-sizing: border-box;
-	overflow-y: scroll;
-
-	-webkit-transition: all 500ms cubic-bezier(.6,0,.4,1);
-    -moz-transition: all 500ms cubic-bezier(.6,0,.4,1);
-    -o-transition: all 500ms cubic-bezier(.6,0,.4,1);
-    -ms-transition: all 500ms cubic-bezier(.6,0,.4,1);    
-    transition: all 500ms cubic-bezier(.6,0,.4,1);
-}
-
-.clearBorder {
-	border: transparent;
-}
-
-.clearBorderTop {
-	border-top: transparent;
-}
-
-.clearBorderRight {
-	border-right: transparent;
-}
-
-.clearBorderBottom {
-	border-bottom: transparent;
-}
-
-.clearBorderLeft {
-	border-left: transparent;
-}
-

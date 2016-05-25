@@ -48,13 +48,15 @@
 @media (min-width: 620px) {
 	.panelIcon {
 		margin-left: -30.9px;
-		margin-top: -55px;
+		margin-top: -80px;
 		width: 61.8px;
+		transform: scale(2);
 	}
 
 	.iconTextContainer {
 		margin-left: -77.2px;
-		margin-top: 15px;
+		margin-top: 45px;
 		width: 154.5px;
+		transform: scale(2);
 	}
 }
