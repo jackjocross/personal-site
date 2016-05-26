@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import styles from './panel.css';
 
 export default class Panel extends React.Component {
@@ -6,10 +7,6 @@ export default class Panel extends React.Component {
 		super(props);
 
 		this.children = React.Children.toArray(this.props.children);
-
-		this.state = {
-			hidden: true,
-		};
 	}
 	render() {
 		let {column, row, size, clickedColumn, clickedRow, panelClick, wait} = this.props;
@@ -47,14 +44,9 @@ export default class Panel extends React.Component {
 			};
 		}
 
-		// Wait to render the text the animation is complete
-		if (isTarget && !this.state.hidden) {
+		if (isTarget) {
 			return this.renderContent();
-		} else if (isTarget && this.state.hidden) {
-			this.delayContentShow(wait);
-			return this.renderIcon();
 		} else {
-			this.state.hidden = true;
 			return this.renderIcon();
 		}
 	}
@@ -104,23 +96,21 @@ export default class Panel extends React.Component {
 
 		return panelClass;
 	};
-	delayContentShow = (wait) => {
-		setTimeout(() => {
-			let hidden = false;
-            this.setState({hidden});
-        }, wait);
-	};
 	renderIcon = () => {
 		return(
 			<div onClick={this.props.panelClick.bind(null, this.props.column, this.props.row)} style={this.transformStyle} className={this.panelClass}>
-				{this.children[0]}
+				<ReactCSSTransitionGroup transitionName="panel" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+					{this.children[0]}
+				</ReactCSSTransitionGroup>
 			</div>
 		);
 	};
 	renderContent = () => {
 		return(
 			<div onClick={this.props.panelClick.bind(null, this.props.column, this.props.row)} style={this.transformStyle} className={this.panelClass}>
-				{this.children[1]}
+				<ReactCSSTransitionGroup transitionName="panel" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
+					{this.children[1]}
+				</ReactCSSTransitionGroup>
 			</div>
 		);
 	};

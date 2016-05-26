@@ -18,9 +18,9 @@
 }
 
 .panelIcon {
+    height: auto;
 	margin: 30% 30% 5%;
     width: 40%;
-    height: auto;
 }
 
 .contentContainer {
@@ -41,17 +41,12 @@
     transition: opacity 500ms cubic-bezier(.6,0,.4,1);
 }
 
-.hidden {
-	opacity: 0;
-}
-
 .panel {
     position: absolute;
     border-style: solid;
     border-color: white;
     border-width: 2px 2px 2px 2px;
     box-sizing: border-box;
-    /*overflow-y: scroll;*/
     height: 100%;
     width: 100%;
 
@@ -80,4 +75,22 @@
 
 .clearBorderLeft {
     border-left: transparent;
+}
+
+:global .panel-enter {
+  opacity: 0.01;
+}
+
+:global .panel-enter.panel-enter-active {
+  opacity: 1;
+  transition: opacity 500ms cubic-bezier(.6,0,.4,1);
+}
+
+:global .panel-leave {
+  opacity: 1;
+}
+
+:global .panel-leave.panel-leave-active {
+  opacity: 0.01;
+  transition: opacity 500ms cubic-bezier(.6,0,.4,1);
 }

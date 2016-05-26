@@ -12,9 +12,9 @@
 }
 
 .scrollableContainer {
+    height: 100%;
 	overflow-y: scroll;
-
-	height: 100%;
+    position: absolute;
 	width: 100%;
 }
 
