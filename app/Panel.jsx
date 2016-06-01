@@ -9,7 +9,10 @@ export default class Panel extends React.Component {
 		this.children = React.Children.toArray(this.props.children);
 	}
 	render() {
+		console.log(this.props);
 		let {column, row, size, clickedColumn, clickedRow, panelClick, wait} = this.props;
+
+		// console.log(column, row, panelClick);
 
 		// We are the target if we match the clicked panel
 		let isTarget = clickedColumn === column && clickedRow === row;
@@ -34,13 +37,11 @@ export default class Panel extends React.Component {
 				transform: `scale(${scale.toString()}) translate3d(${(colDist * scale * 100).toString()}%,${(rowDist * scale * 100).toString()}%, 0)`,
 			};
 		} else {
-			// If something was clicked, height and width are 100
-			//let scale = 100 / size;
 			let scale = 1 / size;
 
 			// Update the transform stylings
 			this.transformStyle = {
-				transform: `scale(${scale.toString()}) translate3d(${(columnShift * scale * 100).toString()}%,${(rowShift * scale * 100).toString()}%, 0)`,
+				transform: `scale(${scale.toString()}) translate3d(${(columnShift * 100).toString()}%,${(rowShift * 100).toString()}%, 0)`,
 			};
 		}
 
@@ -51,26 +52,10 @@ export default class Panel extends React.Component {
 		}
 	}
 	shiftCenter = (column, row, size) => {
-		// Odd case 
-		if (size % 2) {
-			return [column - size / 2, row - size / 2];
-		} else { // Even case
-			let columnShift = column - (size - 1) / 2;
-			if (columnShift > 0) {
-				columnShift = Math.ceil(columnShift);
-			} else {
-				columnShift = Math.floor(columnShift);
-			}
+		let columnShift = column - (size - 1) / 2;
+		let rowShift = row - (size - 1) / 2;
 
-			let rowShift = row - (size - 1) / 2;
-			if (rowShift > 0) {
-				rowShift = Math.ceil(rowShift);
-			} else {
-				rowShift = Math.floor(rowShift);
-			}
-
-			return [columnShift, rowShift];
-		}
+		return [columnShift, rowShift];
 	};
 	addEdgeClasses = (column, row, size, isTarget) => {
 		let panelClass = styles.panel;

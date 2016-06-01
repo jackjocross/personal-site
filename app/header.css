@@ -1,0 +1,62 @@
+.header {
+	position: absolute;
+	height: 10%;
+	width: 100%;
+	border-style: solid;
+	border-color: white;
+	border-width: 0 0 2px 0;
+	box-sizing: border-box;
+}
+
+.backArrowContainer {
+	opacity: 1;
+	display: inline-block;
+	padding: 0 3% 0 3%;
+	width: 2em;
+	font-size: 18px;
+	height: 100%;
+	fill: white;
+	cursor: pointer;
+
+	-webkit-transition: opacity 500ms cubic-bezier(.6,0,.4,1);
+    -moz-transition: opacity 500ms cubic-bezier(.6,0,.4,1);
+    -o-transition: opacity 500ms cubic-bezier(.6,0,.4,1);
+    -ms-transition: opacity 500ms cubic-bezier(.6,0,.4,1);    
+    transition: opacity 500ms cubic-bezier(.6,0,.4,1);
+}
+
+.backArrowContainer:hover path {
+	filter: url(#dropshadow);
+}
+
+.backArrowClear {
+	opacity: 0;
+	cursor: default;
+}
+
+.backArrow {
+	width: 2em;
+	height: 100%;
+	overflow: visible;
+}
+
+.updateBackgroundContainer {
+	display: inline-block;
+	padding: 0 3% 0 3%;
+	width: 2em;
+	font-size: 18px;
+	height: 100%;
+	float: right;
+	fill: white;
+	cursor: pointer;
+}
+
+.updateBackgroundContainer:hover path {
+	filter: url(#dropshadow);
+}
+
+.updateBackground {
+	width: 2em;
+	height: 100%;
+	overflow: visible;
+}

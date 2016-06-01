@@ -1,0 +1,10 @@
+.contentContainer {
+    height: 70%;
+	opacity: 1;
+    position: absolute;
+	font-family: arial;
+    font-weight: bolder;
+    color: whitesmoke;
+    font-size: larger;
+    width: 70%;
+}
