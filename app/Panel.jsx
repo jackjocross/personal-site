@@ -9,7 +9,6 @@ export default class Panel extends React.Component {
 		this.children = React.Children.toArray(this.props.children);
 	}
 	render() {
-		console.log(this.props);
 		let {column, row, size, clickedColumn, clickedRow, panelClick, wait} = this.props;
 
 		// console.log(column, row, panelClick);

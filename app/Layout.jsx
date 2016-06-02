@@ -5,39 +5,31 @@ export default class Layout extends React.Component {
 	constructor(props) {
 		super(props);
 	
-		this.childrenArr = React.Children.toArray(this.props.children);
-
-		let sqrt = Math.sqrt(React.Children.count(this.props.children));
-		let roundedSqrt = Math.round(sqrt);
-
-		this.size = roundedSqrt;
-
 		this.state = {
 			clickedColumn: null,
 			clickedRow: null
 		};
 	}
 	render() {
-		let {closeFnStack, ...other} = this.props;
+		let {children, ...other} = this.props;
 
-		// console.log(closeFnStack, other, this.panelClick);
+		let childrenArr = React.Children.toArray(this.props.children);
+		let sqrt = Math.sqrt(React.Children.count(this.props.children));
+		let size = Math.round(sqrt);
 
 		let backArrowContainerStyle = styles.backArrowContainer;
 		if (this.state.backClear) {
 			backArrowContainerStyle += ' ' + styles.backArrowClear;
 		}
 
-		console.log(this.childrenArr);
-
 		return (
 				<div className={styles.layout}>
-					{ this.childrenArr.map((child, childIndex) => {
+					{ childrenArr.map((child, childIndex) => {
 							if (typeof child === 'undefined') return;
-							console.log(child);
 							let childWithProps = React.cloneElement(child, {
-								column: childIndex % this.size, 
-								row: Math.floor(childIndex / this.size),
-								size: this.size,
+								column: childIndex % size, 
+								row: Math.floor(childIndex / size),
+								size: size,
 								clickedColumn: this.state.clickedColumn, 
 								clickedRow: this.state.clickedRow,
 								panelClick: this.panelClick,
@@ -48,7 +40,9 @@ export default class Layout extends React.Component {
 				</div>
 		);
 	};
-	panelClick = (clickedColumn, clickedRow) => {
+	panelClick = (clickedColumn, clickedRow, event) => {
+		console.log(this.props);
+		event.stopPropagation();
 		this.props.closeFnStack.push(this.closeFn);
 		this.setState({clickedColumn, clickedRow});
 	};
