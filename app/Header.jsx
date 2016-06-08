@@ -46,6 +46,10 @@ export default class Header extends React.Component {
 		);
 	};
 	close = () => {
+		if (this.props.closeFnStack.length === 0) {
+			return;
+		}
+
 		// Get the close function for the current layout
 		let closeFn = this.props.closeFnStack.pop();
 

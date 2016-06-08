@@ -41,7 +41,9 @@ export default class Layout extends React.Component {
 		);
 	};
 	panelClick = (clickedColumn, clickedRow, event) => {
-		console.log(this.props);
+		if (clickedRow === this.state.clickedRow && clickedColumn === this.state.clickedColumn) {
+			return;
+		}
 		event.stopPropagation();
 		this.props.closeFnStack.push(this.closeFn);
 		this.setState({clickedColumn, clickedRow});

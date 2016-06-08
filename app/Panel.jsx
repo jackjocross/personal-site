@@ -9,7 +9,7 @@ export default class Panel extends React.Component {
 		this.children = React.Children.toArray(this.props.children);
 	}
 	render() {
-		let {column, row, size, clickedColumn, clickedRow, panelClick, wait} = this.props;
+		let {column, row, size, clickedColumn, clickedRow, panelClick, wait, ...other} = this.props;
 
 		// console.log(column, row, panelClick);
 
@@ -45,7 +45,7 @@ export default class Panel extends React.Component {
 		}
 
 		if (isTarget) {
-			return this.renderContent();
+			return this.renderContent(other);
 		} else {
 			return this.renderIcon();
 		}
@@ -89,11 +89,12 @@ export default class Panel extends React.Component {
 			</div>
 		);
 	};
-	renderContent = () => {
+	renderContent = (other) => {
+		let childWithProps = React.cloneElement(this.children[1], other);
 		return(
 			<div onClick={this.props.panelClick.bind(null, this.props.column, this.props.row)} style={this.transformStyle} className={this.panelClass}>
 				<ReactCSSTransitionGroup transitionName="panel" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-					{this.children[1]}
+					{childWithProps}
 				</ReactCSSTransitionGroup>
 			</div>
 		);
