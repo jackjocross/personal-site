@@ -47,17 +47,6 @@ export default class Header extends React.Component {
 	};
 	close = () => {
 		if (this.props.closeFnStack.length === 0) {
-			return;
-		}
-
-		// Get the close function for the current layout
-		let closeFn = this.props.closeFnStack.pop();
-
-		// Call the close function for the current layout
-		closeFn();
-
-		// Hide the back button after animation if there are no more closeFns
-		if (this.props.closeFnStack.length === 0) {
 			setTimeout(() => {
 				this.hideClose();
 			}, 500);
@@ -65,7 +54,16 @@ export default class Header extends React.Component {
 			let backClear = true;
 
 			this.setState({backClear});
+			return;
+		} else {
+
 		}
+
+		// Get the close function for the current layout
+		let closeFn = this.props.closeFnStack.pop();
+
+		// Call the close function for the current layout
+		closeFn();
 	};
 	hideClose = () => {
 		let backHidden = true;
