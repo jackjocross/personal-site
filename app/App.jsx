@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateBackground } from './actions';
 import Background from './Background.jsx';
 import Layout from './Layout.jsx';
-import Header from  './Header.jsx'
+import Header from  './Header.jsx';
 import About from './About.jsx';
 import Work from  './Work.jsx';
 import Resume from './Resume.jsx';
@@ -10,7 +12,7 @@ import Panel from './Panel.jsx';
 import PanelIcon from './PanelIcon.jsx';
 import styles from './app.css';
 
-export default class App extends React.Component {
+class App extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -24,8 +26,8 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div className={styles.container}>
-				<Background hue={this.state.backgroundHue} />
-				<Header closeFnStack={this.state.closeFnStack} updateBackground={this.updateBackground}/>
+				<Background hue={this.props.hue}/>
+				<Header closeFnStack={this.state.closeFnStack} updateBackground={this.props.onShuffleClick}/>
 				<div className={styles.contentContainer}>
 					<Layout closeFnStack={this.state.closeFnStack} wait={this.wait}>
 						<Panel>
@@ -49,8 +51,21 @@ export default class App extends React.Component {
 			</div>
 		);
 	};
-	updateBackground = () => {
-		const backgroundHue = Math.floor(Math.random() * 360);
-		this.setState({backgroundHue});
-	};
 }
+
+const mapStateToProps = (state) => {
+	const {hue} = state;
+	return {hue};
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onShuffleClick: () => {
+			dispatch(updateBackground(Math.floor(Math.random() * 360)));
+		}
+	}
+}
+
+const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default ConnectedApp;

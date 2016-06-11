@@ -1,9 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import personalApp from './reducers';
 import App from './App.jsx';
 import icons from './../assets/icomoon.woff';
 
-ReactDOM.render(
-  <App />,
+let store = createStore(personalApp, {hue: Math.floor(Math.random() * 360)});
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('app')
 );
