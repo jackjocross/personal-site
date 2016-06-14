@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { removeCloseFn } from './actions';
 import styles from './header.css';
 
-export default class Header extends React.Component {
+class Header extends React.Component {
 	constructor(props) {
 		super(props);
 	
@@ -12,7 +14,7 @@ export default class Header extends React.Component {
 	}
 	render() {
 		let backArrowContainerStyle = styles.backArrowContainer;
-		if (this.state.backClear) {
+		if (!this.props.closeFnStack.length) {
 			backArrowContainerStyle += ' ' + styles.backArrowClear;
 		}
 
@@ -60,13 +62,32 @@ export default class Header extends React.Component {
 		}
 
 		// Get the close function for the current layout
-		let closeFn = this.props.closeFnStack.pop();
+		let closeFn = this.props.closeFnStack[this.props.closeFnStack.length - 1];
 
 		// Call the close function for the current layout
 		closeFn();
+
+		this.props.onBackClick();
 	};
 	hideClose = () => {
 		let backHidden = true;
 		this.setState({backHidden});
 	}
 }
+
+const mapStateToProps = (state) => {
+	const {closeFnStack} = state.layout;
+	return {closeFnStack};
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onBackClick: () => {
+			dispatch(removeCloseFn());
+		}
+	}
+}
+
+const ConnectedHeader = connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export default ConnectedHeader;

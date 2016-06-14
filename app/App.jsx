@@ -54,7 +54,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-	const {hue} = state;
+	const {hue} = state.background;
 	return {hue};
 }
 

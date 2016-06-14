@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addCloseFn } from './actions';
 import styles from './layout.css';
 
-export default class Layout extends React.Component {
+class Layout extends React.Component {
 	constructor(props) {
 		super(props);
 	
@@ -45,7 +47,9 @@ export default class Layout extends React.Component {
 			return;
 		}
 		event.stopPropagation();
-		this.props.closeFnStack.push(this.closeFn);
+		
+		this.props.onPanelClick(this.closeFn);
+
 		this.setState({clickedColumn, clickedRow});
 	};
 	closeFn = () => {
@@ -53,4 +57,21 @@ export default class Layout extends React.Component {
 			clickedRow = null;
 		this.setState({clickedColumn, clickedRow});
 	}
-} 
+}
+
+const mapStateToProps = (state) => {
+	const {closeFnStack} = state;
+	return {closeFnStack};
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+	return {
+		onPanelClick: (closeFn) => {
+			dispatch(addCloseFn(closeFn));
+		}
+	}
+}
+
+const ConnectedLayout = connect(mapStateToProps, mapDispatchToProps)(Layout);
+
+export default ConnectedLayout;

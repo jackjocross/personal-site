@@ -6,7 +6,7 @@ import personalApp from './reducers';
 import App from './App.jsx';
 import icons from './../assets/icomoon.woff';
 
-let store = createStore(personalApp, {hue: Math.floor(Math.random() * 360)});
+let store = createStore(personalApp);
 
 render(
   <Provider store={store}>

@@ -11,8 +11,6 @@ export default class Panel extends React.Component {
 	render() {
 		let {column, row, size, clickedColumn, clickedRow, panelClick, wait, ...other} = this.props;
 
-		// console.log(column, row, panelClick);
-
 		// We are the target if we match the clicked panel
 		let isTarget = clickedColumn === column && clickedRow === row;
 
