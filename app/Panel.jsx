@@ -9,7 +9,7 @@ export default class Panel extends React.Component {
 		this.children = React.Children.toArray(this.props.children);
 	}
 	render() {
-		let {column, row, size, clickedColumn, clickedRow, panelClick, wait, ...other} = this.props;
+		let {column, row, size, clickedColumn, clickedRow, panelClick, ...other} = this.props;
 
 		// We are the target if we match the clicked panel
 		let isTarget = clickedColumn === column && clickedRow === row;

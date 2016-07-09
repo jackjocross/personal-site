@@ -20,8 +20,6 @@ class App extends React.Component {
 			backgroundHue: Math.floor(Math.random() * 360),
 			closeFnStack: []
 		};
-
-		this.wait = 650;
 	}
 	render() {
 		return (
@@ -29,7 +27,7 @@ class App extends React.Component {
 				<Background hue={this.props.hue}/>
 				<Header closeFnStack={this.state.closeFnStack} updateBackground={this.props.onShuffleClick}/>
 				<div className={styles.contentContainer}>
-					<Layout closeFnStack={this.state.closeFnStack} wait={this.wait}>
+					<Layout closeFnStack={this.state.closeFnStack}>
 						<Panel>
 							<PanelIcon text={'About Me'} iconPath={'M16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM22 8c1.105 0 2 0.895 2 2s-0.895 2-2 2-2-0.895-2-2 0.895-2 2-2zM10 8c1.105 0 2 0.895 2 2s-0.895 2-2 2-2-0.895-2-2 0.895-2 2-2zM16.994 21.23c-0.039-0.035-0.078-0.072-0.115-0.109-0.586-0.586-0.878-1.353-0.879-2.121-0 0.768-0.293 1.535-0.879 2.121-0.038 0.038-0.076 0.074-0.115 0.109-2.704 2.453-9.006-0.058-9.006-3.23 1.938 1.25 3.452 0.306 4.879-1.121 1.172-1.172 3.071-1.172 4.243 0 0.586 0.586 0.879 1.353 0.879 2.121 0-0.768 0.293-1.535 0.879-2.121 1.172-1.172 3.071-1.172 4.243 0 1.427 1.427 2.941 2.371 4.879 1.121 0 3.173-6.302 5.684-9.006 3.23z'} />
 							<About />
