@@ -5,7 +5,7 @@ const Background = ({hue}) => {
 	const colorString = `hsla(${hue}, 100%, 50%, 1), hsla(${hue + 75}, 100%, 50%, 1)`;
 
 	const backgroundStyle = {
-		background: `hsla(${hue}, 100%, 50%, 1)`,
+		background: `${colorString}`,
 		background: `-webkit-linear-gradient(left top, ${colorString})`,
 		background: `-o-linear-gradient(bottom right, ${colorString})`,
 		background: `-moz-linear-gradient(bottom right, ${colorString})`,
