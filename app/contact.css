@@ -25,6 +25,14 @@
     display: flex;
     width: 100%;
     height: 33.33%;
+    cursor: pointer;
+    text-decoration: none;
+    color: whitesmoke;
+    user-select: none;
+}
+
+.contactContainer:not(:last-child) {
+    margin-bottom: 5%;
 }
 
 .contactIcon {
@@ -44,4 +52,8 @@
 
 .contactSub {
     font-weight: lighter;
+}
+
+.contactContainer:hover .contactSub {
+    text-decoration: underline;
 }
