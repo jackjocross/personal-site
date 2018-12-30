@@ -1,5 +1,5 @@
 {
-  "name": "react-static-example-basic",
+  "name": "personal-site",
   "private": true,
   "scripts": {
     "start": "react-static start",
@@ -10,16 +10,28 @@
     "serve": "serve dist -p 3000 -s"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.5",
     "@reach/router": "^1.2.1",
     "axios": "^0.18.0",
+    "dotenv": "^6.2.0",
+    "facepaint": "^1.2.1",
+    "image-downloader": "^3.4.2",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.3.12",
-    "react-static": "^6.0.18"
+    "react-static": "^6.0.18",
+    "request": "^2.88.0",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^10.0.5",
+    "babel-plugin-emotion": "^10.0.5",
     "eslint-config-react-tools": "1.x.x",
     "serve": "10.1.1"
+  },
+  "resolutions": {
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2"
   }
 }
