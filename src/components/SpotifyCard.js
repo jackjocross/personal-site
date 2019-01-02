@@ -2,7 +2,6 @@ import React from 'react';
 import { LinkArea } from './LinkArea';
 import { theme } from '../theme';
 import { LinkAreaAnchor } from './LinkAreaAnchor';
-import artistImageSrc from './artist.jpg';
 
 export const SpotifyCard = ({
   name,

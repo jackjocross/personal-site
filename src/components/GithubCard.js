@@ -13,7 +13,7 @@ export const GithubCard = ({
 }) => (
   <LinkArea
     css={{
-      border: `1px solid ${theme.color.metal}`,
+      border: `1px solid ${theme.color.cloud}`,
       borderRadius: theme.borderRadius,
       cursor: 'pointer',
       width: 200,
@@ -25,9 +25,9 @@ export const GithubCard = ({
       willChange: 'box-shadow',
       transition: 'box-shadow 100ms ease-in',
       ':hover': {
-        boxShadow: `0 0 0 1px ${
+        boxShadow: `0 0 0 2px ${
           theme.color.black
-        }, 0 0 0 3px rgba(0, 0, 0, .3)`,
+        }, 0 0 0 4px rgba(0, 0, 0, .3)`,
       },
       fontSize: theme.fontSize.medium,
     }}
