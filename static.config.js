@@ -2,6 +2,7 @@ import fs from 'fs';
 import { config } from 'dotenv';
 import axios from 'axios';
 import { parseString } from 'xml2js';
+import { image } from 'image-downloader';
 
 config();
 
@@ -47,6 +48,25 @@ async function getFoursquareData() {
       process.env.FOURSQUARE_ACCESS_TOKEN
     }&v=20181227`
   );
+
+  fs.mkdirSync('./dist/static-maps');
+  const { items } = data.response.checkins;
+  for (let index = 0; index < items.length; index++) {
+    const {
+      id,
+      venue: {
+        location: { lat, lng },
+      },
+    } = items[index];
+
+    // eslint-disable-next-line
+    await image({
+      url: `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&markers=${lat},${lng}&zoom=15&size=400x400&scale=2&maptype=roadmap&key=${
+        process.env.GOOGLE_KEY
+      }`,
+      dest: `./dist/static-maps/${id}.png`,
+    });
+  }
 
   return data;
 }

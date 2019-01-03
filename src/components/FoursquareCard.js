@@ -3,13 +3,7 @@ import { LinkArea } from './LinkArea';
 import { theme } from '../theme';
 import { LinkAreaAnchor } from './LinkAreaAnchor';
 
-export const FoursquareCard = ({
-  venue: {
-    id,
-    name,
-    location: { lat, lng },
-  },
-}) => (
+export const FoursquareCard = ({ venue: { id, name } }) => (
   <LinkArea
     css={{
       position: 'relative',
@@ -28,9 +22,7 @@ export const FoursquareCard = ({
           theme.color.black
         }, 0 0 0 4px rgba(0, 0, 0, .3)`,
       },
-      backgroundImage: `url(https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&markers=${lat},${lng}&zoom=15&size=400x400&scale=2&maptype=roadmap&key=${
-        process.env.GOOGLE_KEY
-      })`,
+      backgroundImage: `url(/static-maps/${id}.png)`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
     }}
