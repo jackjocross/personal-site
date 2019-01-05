@@ -1,50 +1,21 @@
 import React from 'react';
-import { LinkArea } from './LinkArea';
 import { LinkAreaAnchor } from './LinkAreaAnchor';
 import { theme } from '../theme';
+import { Card } from './Card';
 
 export const GoodreadsCard = ({
-  book: [
-    {
-      title: [title],
-      link: [bookLink],
-      image_url: [image_url],
-      authors: [
-        {
-          author: [
-            {
-              name: [name],
-              link: [authorLink],
-            },
-          ],
-        },
-      ],
-    },
-  ],
+  book: { imageUrl, bookLink, title, authorLink, name },
 }) => (
-  <LinkArea
+  <Card
     css={{
       border: `1px solid ${theme.color.cloud}`,
-      borderRadius: theme.borderRadius,
-      cursor: 'pointer',
-      width: 220,
-      display: 'flex',
-      flexDirection: 'column',
       padding: theme.space.small,
-      whiteSpace: 'normal',
+      width: 200,
       height: `calc(100% - 2 * ${theme.space.small})`,
-      willChange: 'box-shadow',
-      transition: 'box-shadow 100ms ease-in',
-      ':hover': {
-        boxShadow: `0 0 0 2px ${
-          theme.color.black
-        }, 0 0 0 4px rgba(0, 0, 0, .3)`,
-      },
-      fontSize: theme.fontSize.medium,
     }}
   >
     <div css={{ marginBottom: theme.space.medium }}>
-      <img src={image_url} alt="" css={{ borderRadius: theme.borderRadius }} />
+      <img src={imageUrl} alt="" css={{ borderRadius: theme.borderRadius }} />
     </div>
     <div css={{ marginBottom: theme.space.medium }}>
       <LinkAreaAnchor
@@ -81,5 +52,5 @@ export const GoodreadsCard = ({
         {name}
       </a>
     </div>
-  </LinkArea>
+  </Card>
 );

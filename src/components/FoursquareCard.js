@@ -1,27 +1,14 @@
 import React from 'react';
-import { LinkArea } from './LinkArea';
 import { theme } from '../theme';
 import { LinkAreaAnchor } from './LinkAreaAnchor';
+import { Card } from './Card';
 
-export const FoursquareCard = ({ venue: { id, name } }) => (
-  <LinkArea
+export const FoursquareCard = ({ checkin: { id, name } }) => (
+  <Card
     css={{
       position: 'relative',
-      borderRadius: theme.borderRadius,
-      overflow: 'hidden',
-      cursor: 'pointer',
       width: 320,
       height: 320,
-      display: 'flex',
-      flexDirection: 'column',
-      whiteSpace: 'normal',
-      willChange: 'box-shadow',
-      transition: 'box-shadow 100ms ease-in',
-      ':hover': {
-        boxShadow: `0 0 0 2px ${
-          theme.color.black
-        }, 0 0 0 4px rgba(0, 0, 0, .3)`,
-      },
       backgroundImage: `url(/static-maps/${id}.png)`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -55,5 +42,5 @@ export const FoursquareCard = ({ venue: { id, name } }) => (
         {name}
       </LinkAreaAnchor>
     </div>
-  </LinkArea>
+  </Card>
 );

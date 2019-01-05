@@ -1,33 +1,16 @@
 import React from 'react';
-import { LinkArea } from './LinkArea';
 import { theme } from '../theme';
 import { LinkAreaAnchor } from './LinkAreaAnchor';
+import { Card } from './Card';
 
-export const SpotifyCard = ({
-  name,
-  external_urls: { spotify: spotifyUrl },
-  images: [{ url }],
-}) => (
-  <LinkArea
+export const SpotifyCard = ({ artist: { name, spotifyUrl, imageUrl } }) => (
+  <Card
     css={{
-      position: 'relative',
-      borderRadius: theme.borderRadius,
-      overflow: 'hidden',
-      cursor: 'pointer',
-      width: 300,
-      height: 300,
-      display: 'flex',
-      flexDirection: 'column',
-      whiteSpace: 'normal',
-      willChange: 'box-shadow',
-      transition: 'box-shadow 100ms ease-in',
-      ':hover': {
-        boxShadow: `0 0 0 2px ${
-          theme.color.black
-        }, 0 0 0 4px rgba(0, 0, 0, .3)`,
-      },
-      backgroundImage: `url(${url})`,
+      width: 320,
+      height: 320,
+      backgroundImage: `url(${imageUrl})`,
       backgroundSize: 'cover',
+      backgroundPosition: 'center',
     }}
   >
     <div
@@ -57,5 +40,5 @@ export const SpotifyCard = ({
         {name}
       </LinkAreaAnchor>
     </div>
-  </LinkArea>
+  </Card>
 );

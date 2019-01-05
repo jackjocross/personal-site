@@ -1,40 +1,20 @@
 import React from 'react';
-import { LinkArea } from './LinkArea';
 import { theme } from '../theme';
 import { LinkAreaAnchor } from './LinkAreaAnchor';
+import { Card } from './Card';
 
-export const GithubCard = ({
-  repository: {
-    name,
-    owner: { login, html_url: ownerUrl },
-    description,
-    html_url: repoUrl,
-  },
-}) => (
-  <LinkArea
+export const GithubCard = ({ repo: { name, description, url, owner } }) => (
+  <Card
     css={{
       border: `1px solid ${theme.color.cloud}`,
-      borderRadius: theme.borderRadius,
-      cursor: 'pointer',
-      width: 200,
-      display: 'flex',
-      flexDirection: 'column',
       padding: theme.space.small,
-      whiteSpace: 'normal',
+      width: 200,
       height: `calc(100% - 2 * ${theme.space.small})`,
-      willChange: 'box-shadow',
-      transition: 'box-shadow 100ms ease-in',
-      ':hover': {
-        boxShadow: `0 0 0 2px ${
-          theme.color.black
-        }, 0 0 0 4px rgba(0, 0, 0, .3)`,
-      },
-      fontSize: theme.fontSize.medium,
     }}
   >
     <div css={{ marginBottom: theme.space.medium }}>
       <LinkAreaAnchor
-        href={repoUrl}
+        href={url}
         target="_blank"
         rel="noopener noreferrer"
         css={{
@@ -53,7 +33,7 @@ export const GithubCard = ({
     </div>
     <div css={{ marginBottom: theme.space.medium }}>
       <a
-        href={ownerUrl}
+        href={owner.url}
         target="_blank"
         rel="noopener noreferrer"
         css={{
@@ -64,9 +44,9 @@ export const GithubCard = ({
           },
         }}
       >
-        {login}
+        {owner.login}
       </a>
     </div>
     <div>{description}</div>
-  </LinkArea>
+  </Card>
 );

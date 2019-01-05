@@ -28,6 +28,7 @@ export default {
           github: await getGithubData(),
           goodreads: await getGoodreadsData(),
           spotify: await getSpotifyData(),
+          unsplash: await getUnsplashData(),
         };
 
         fs.writeFileSync('./.cache', JSON.stringify(data));
@@ -49,15 +50,19 @@ async function getFoursquareData() {
     }&v=20181227`
   );
 
-  fs.mkdirSync('./dist/static-maps');
-  const { items } = data.response.checkins;
-  for (let index = 0; index < items.length; index++) {
-    const {
+  const filteredData = data.response.checkins.items.map(
+    ({
       id,
       venue: {
+        name,
         location: { lat, lng },
       },
-    } = items[index];
+    }) => ({ id, name, lat, lng })
+  );
+
+  fs.mkdirSync('./dist/static-maps');
+  for (let index = 0; index < filteredData.length; index++) {
+    const { id, lat, lng } = filteredData[index];
 
     // eslint-disable-next-line
     await image({
@@ -68,22 +73,67 @@ async function getFoursquareData() {
     });
   }
 
-  return data;
+  return filteredData;
 }
 
 async function getGithubData() {
-  const { data } = await axios.get(
-    'https://api.github.com/search/commits?q=author:crosscompile&sort=author-date',
+  // @todo stop being a savage and use a client library for this
+  const { data } = await axios.post(
+    'https://api.github.com/graphql',
+    {
+      query: `
+        query { 
+          user(login: "crosscompile") {
+            repositoriesContributedTo(privacy: PUBLIC, first: 20, includeUserRepositories: false, contributionTypes: COMMIT, orderBy: {field: STARGAZERS, direction: DESC}) {
+              nodes {
+                id
+                name
+                description
+                url
+                owner {
+                  login
+                  url
+                }
+              }
+            }
+            
+          }
+        }
+      `,
+    },
     {
       headers: {
-        Accept: 'application/vnd.github.cloak-preview',
         Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`,
       },
     }
   );
 
-  return data;
+  return data.data.user.repositoriesContributedTo.nodes;
 }
+
+const filterGoodreads = data =>
+  data.GoodreadsResponse.reviews[0].review.map(
+    ({
+      book: [
+        {
+          id,
+          title: [title],
+          link: [bookLink],
+          image_url: [imageUrl],
+          authors: [
+            {
+              author: [
+                {
+                  name: [name],
+                  link: [authorLink],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    }) => ({ id, title, bookLink, imageUrl, name, authorLink })
+  );
 
 async function getGoodreadsData() {
   const { data: readXml } = await axios.get(
@@ -91,26 +141,18 @@ async function getGoodreadsData() {
       process.env.GOODREADS_KEY
     }`
   );
-  const read = await parseXml(readXml);
+  const read = filterGoodreads(await parseXml(readXml));
 
   const { data: currentlyReadingXml } = await axios.get(
     `https://www.goodreads.com/review/list?v=2&id=49614500&shelf=currently-reading&per_page=200&key=${
       process.env.GOODREADS_KEY
     }`
   );
-  const currentlyReading = await parseXml(currentlyReadingXml);
-
-  const { data: toReadXml } = await axios.get(
-    `https://www.goodreads.com/review/list?v=2&id=49614500&shelf=to-read&per_page=200&key=${
-      process.env.GOODREADS_KEY
-    }`
-  );
-  const toRead = await parseXml(toReadXml);
+  const currentlyReading = filterGoodreads(await parseXml(currentlyReadingXml));
 
   return {
     read,
     currentlyReading,
-    toRead,
   };
 }
 
@@ -130,5 +172,38 @@ async function getSpotifyData() {
     { headers: { Authorization: `Bearer ${spotifyAccessToken}` } }
   );
 
-  return data;
+  const filteredData = data.items.map(
+    ({
+      id,
+      name,
+      external_urls: { spotify: spotifyUrl },
+      images: [{ url: imageUrl }],
+    }) => ({
+      id,
+      name,
+      spotifyUrl,
+      imageUrl,
+    })
+  );
+
+  return filteredData;
+}
+
+async function getUnsplashData() {
+  const { data } = await axios.get(
+    `https://api.unsplash.com/users/crossprocess/photos?per_page=20&order_by=popular&client_id=${
+      process.env.UNSPLASH_KEY
+    }`
+  );
+
+  const filteredData = data.map(
+    ({ id, description, urls: { small: imageUrl }, links: { html: url } }) => ({
+      id,
+      description,
+      url,
+      imageUrl,
+    })
+  );
+
+  return filteredData;
 }
