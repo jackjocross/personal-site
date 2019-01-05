@@ -3,6 +3,7 @@ import facepaint from 'facepaint';
 const color = {
   white: '#fff',
   black: '#000',
+  pink: '#D700BF',
   cloud: '#ddd',
   platinum: '#999',
   gray: '#555',

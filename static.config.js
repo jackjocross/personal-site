@@ -19,6 +19,7 @@ export default {
   Document: ({ Html, Head, Body, children }) => (
     <Html lang="en-US">
       <Head>
+        <title>Jack Cross</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
@@ -55,7 +56,7 @@ export default {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'UA-131786655-1');`,
+              gtag('config', '${process.env.GOOGLE_ANALTICS}');`,
           }}
         />
       </Head>
