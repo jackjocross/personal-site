@@ -26,48 +26,42 @@ const Index = () => (
       <Logo width={150} height={150} />
     </div>
     <RouteData>
-      {({ github, goodreads, spotify, foursquare, unsplash }) =>
-        console.log({ unsplash }) || (
-          <div
-            css={{
-              margin: `${theme.space.medium} 0`,
-            }}
-          >
-            <SummaryList emoji="💻" title="What I'm" titleStrong="Coding">
-              {github.map(repo => (
-                <GithubCard key={repo.id} repo={repo} />
-              ))}
-            </SummaryList>
-            <SummaryList
-              emoji="📷"
-              title="What I'm"
-              titleStrong="Photographing"
-            >
-              {unsplash.map(photo => (
-                <UnsplashCard key={photo.id} photo={photo} />
-              ))}
-            </SummaryList>
-            <SummaryList emoji="🎧" title="What I'm" titleStrong="Listening To">
-              {spotify.map(artist => (
-                <SpotifyCard key={artist.id} artist={artist} />
-              ))}
-            </SummaryList>
-            <SummaryList emoji="📖" title="What I'm" titleStrong="Reading">
-              {goodreads.currentlyReading.map(book => (
-                <GoodreadsCard key={book.id} book={book} />
-              ))}
-              {goodreads.read.map(book => (
-                <GoodreadsCard key={book.id} book={book} />
-              ))}
-            </SummaryList>
-            <SummaryList emoji="🗺" title="Where I'm" titleStrong="Going">
-              {foursquare.map(checkin => (
-                <FoursquareCard key={checkin.id} checkin={checkin} />
-              ))}
-            </SummaryList>
-          </div>
-        )
-      }
+      {({ github, goodreads, spotify, foursquare, unsplash }) => (
+        <div
+          css={{
+            margin: `${theme.space.medium} 0`,
+          }}
+        >
+          <SummaryList emoji="💻" title="What I'm" titleStrong="Coding">
+            {github.map(repo => (
+              <GithubCard key={repo.id} repo={repo} />
+            ))}
+          </SummaryList>
+          <SummaryList emoji="📷" title="What I'm" titleStrong="Photographing">
+            {unsplash.map(photo => (
+              <UnsplashCard key={photo.id} photo={photo} />
+            ))}
+          </SummaryList>
+          <SummaryList emoji="🎧" title="What I'm" titleStrong="Listening To">
+            {spotify.map(artist => (
+              <SpotifyCard key={artist.id} artist={artist} />
+            ))}
+          </SummaryList>
+          <SummaryList emoji="📖" title="What I'm" titleStrong="Reading">
+            {goodreads.currentlyReading.map(book => (
+              <GoodreadsCard key={book.id} book={book} />
+            ))}
+            {goodreads.read.map(book => (
+              <GoodreadsCard key={book.id} book={book} />
+            ))}
+          </SummaryList>
+          <SummaryList emoji="🗺" title="Where I'm" titleStrong="Going">
+            {foursquare.map(checkin => (
+              <FoursquareCard key={checkin.id} checkin={checkin} />
+            ))}
+          </SummaryList>
+        </div>
+      )}
     </RouteData>
     <div
       css={{

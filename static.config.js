@@ -1,3 +1,4 @@
+import React from 'react';
 import fs from 'fs';
 import { config } from 'dotenv';
 import axios from 'axios';
@@ -15,6 +16,32 @@ const parseXml = async xml =>
 
 export default {
   siteRoot: 'https://cross.cool',
+  Document: ({ Html, Head, Body, children }) => (
+    <Html lang="en-US">
+      <Head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          href="https://unpkg.com/firacode@1.205.0/distr/fira_code.css"
+          rel="stylesheet"
+        />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-131786655-1"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'UA-131786655-1');`,
+          }}
+        />
+      </Head>
+      <Body>{children}</Body>
+    </Html>
+  ),
   getRoutes: () => [
     {
       path: '/',
@@ -197,7 +224,7 @@ async function getUnsplashData() {
   );
 
   const filteredData = data.map(
-    ({ id, description, urls: { small: imageUrl }, links: { html: url } }) => ({
+    ({ id, description, urls: { full: imageUrl }, links: { html: url } }) => ({
       id,
       description,
       url,
