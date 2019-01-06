@@ -6,6 +6,7 @@ import { Card } from './Card';
 export const SpotifyCard = ({ artist: { name, spotifyUrl, imageUrl } }) => (
   <Card
     css={{
+      position: 'relative',
       width: 320,
       height: 320,
       backgroundImage: `url(${imageUrl})`,
