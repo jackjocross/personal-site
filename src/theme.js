@@ -32,7 +32,7 @@ const fontWeight = {
 };
 
 const fontFamily =
-  '"Fira Code", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif, ' +
+  '"Fira Code", "Courier", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif, ' +
   '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'; // emoji fonts
 
 const lineHeight = 1.3125;

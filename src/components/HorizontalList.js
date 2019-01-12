@@ -43,7 +43,7 @@ export const HorizontalList = ({ title, children, ...rest }) => (
         offsetMargin,
       ]}
     >
-      <div css={{ marginBottom: theme.space.xsmall }}>{title}</div>
+      <div css={{ marginBottom: theme.space.small }}>{title}</div>
       <div
         css={[
           {

@@ -7,7 +7,8 @@
     "build": "react-static build",
     "bundle": "react-static bundle",
     "export": "react-static export",
-    "serve": "serve dist -p 3000 -s"
+    "serve": "serve dist -p 3000 -s",
+    "icons": "svgr --template svgrTemplate.js -d ./src/components/Icon ./icons"
   },
   "dependencies": {
     "@emotion/core": "^10.0.5",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^10.0.5",
+    "@svgr/cli": "^4.1.0",
     "babel-plugin-emotion": "^10.0.5",
     "eslint-config-react-tools": "1.x.x",
     "serve": "10.1.1"

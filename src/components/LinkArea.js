@@ -22,6 +22,7 @@ export class LinkArea extends React.Component {
     if (
       this.link.current &&
       this.link.current !== event.target &&
+      !event.target.href &&
       this.up - this.down < CLICK_THRESHOLD
     ) {
       this.link.current.click();

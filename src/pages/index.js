@@ -9,6 +9,7 @@ import { FoursquareCard } from '../components/FoursquareCard';
 import { Logo } from '../components/Logo';
 import { UnsplashCard } from '../components/UnsplashCard';
 import { ContactForm } from '../components/ContactForm';
+import { ListBreak } from '../components/ListBreak';
 
 const Index = () => (
   <>
@@ -29,7 +30,11 @@ const Index = () => (
           }}
         >
           <SummaryList emoji="💻" title="What I'm" titleStrong="Coding">
-            {github.map(repo => (
+            {github.pinned.map(repo => (
+              <GithubCard key={repo.id} repo={repo} />
+            ))}
+            <ListBreak title="Contributed" />
+            {github.contributed.map(repo => (
               <GithubCard key={repo.id} repo={repo} />
             ))}
           </SummaryList>
@@ -47,6 +52,7 @@ const Index = () => (
             {goodreads.currentlyReading.map(book => (
               <GoodreadsCard key={book.id} book={book} />
             ))}
+            <ListBreak title="Read" />
             {goodreads.read.map(book => (
               <GoodreadsCard key={book.id} book={book} />
             ))}

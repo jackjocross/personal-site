@@ -60,10 +60,6 @@ export default {
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        {/* <link
-          href="https://unpkg.com/firacode@1.205.0/distr/fira_code.css"
-          rel="stylesheet"
-        /> */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-131786655-1"
@@ -152,6 +148,18 @@ async function getGithubData() {
       query: `
         query { 
           user(login: "crosscompile") {
+            pinnedRepositories(first: 20) {
+              nodes {
+                id
+                name
+                description
+                url
+                owner {
+                  login
+                  url
+                }
+              }
+            }
             repositoriesContributedTo(privacy: PUBLIC, first: 20, includeUserRepositories: false, contributionTypes: COMMIT, orderBy: {field: STARGAZERS, direction: DESC}) {
               nodes {
                 id
@@ -176,7 +184,10 @@ async function getGithubData() {
     }
   );
 
-  return data.data.user.repositoriesContributedTo.nodes;
+  return {
+    pinned: data.data.user.pinnedRepositories.nodes,
+    contributed: data.data.user.repositoriesContributedTo.nodes,
+  };
 }
 
 async function filterGoodreads(data) {
