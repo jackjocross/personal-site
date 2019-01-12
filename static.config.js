@@ -3,16 +3,34 @@ import fs from 'fs';
 import { config } from 'dotenv';
 import axios from 'axios';
 import { parseString } from 'xml2js';
-import { image } from 'image-downloader';
+import { image as downloadImage } from 'image-downloader';
+import md5 from 'md5';
+import lqip from 'lqip';
 
 config();
 
-const parseXml = async xml =>
-  new Promise(resolve => {
+async function parseXml(xml) {
+  return new Promise(resolve => {
     parseString(xml, (err, result) => {
       resolve(result);
     });
   });
+}
+
+async function downloadImageGeneratePlaceholder(url, extension) {
+  const fileName = md5(url);
+  const path = `/${fileName}.${extension}`;
+  const dest = `./dist${path}`;
+
+  await downloadImage({
+    url,
+    dest,
+  });
+
+  const placeholder = await lqip.base64(dest);
+
+  return { path, placeholder };
+}
 
 export default {
   siteRoot: 'https://cross.cool',
@@ -42,10 +60,10 @@ export default {
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        <link
+        {/* <link
           href="https://unpkg.com/firacode@1.205.0/distr/fira_code.css"
           rel="stylesheet"
-        />
+        /> */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=UA-131786655-1"
@@ -108,17 +126,19 @@ async function getFoursquareData() {
     }) => ({ id, name, lat, lng })
   );
 
-  fs.mkdirSync('./dist/static-maps');
   for (let index = 0; index < filteredData.length; index++) {
-    const { id, lat, lng } = filteredData[index];
+    const { lat, lng } = filteredData[index];
 
     // eslint-disable-next-line
-    await image({
-      url: `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&markers=${lat},${lng}&zoom=15&size=400x400&scale=2&maptype=roadmap&key=${
+    const { path, placeholder } = await downloadImageGeneratePlaceholder(
+      `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&markers=${lat},${lng}&zoom=15&size=400x400&scale=2&maptype=roadmap&key=${
         process.env.GOOGLE_KEY
       }`,
-      dest: `./dist/static-maps/${id}.png`,
-    });
+      'png'
+    );
+
+    filteredData[index].imagePath = path;
+    filteredData[index].placeholderUri = placeholder;
   }
 
   return filteredData;
@@ -180,7 +200,14 @@ const filterGoodreads = data =>
           ],
         },
       ],
-    }) => ({ id, title, bookLink, imageUrl, name, authorLink })
+    }) => ({
+      id,
+      title,
+      bookLink,
+      imageUrl: imageUrl.replace(/(?<=\d)[s|m|l]/g, 'l'),
+      name,
+      authorLink,
+    })
   );
 
 async function getGoodreadsData() {
@@ -245,13 +272,31 @@ async function getUnsplashData() {
   );
 
   const filteredData = data.map(
-    ({ id, description, urls: { full: imageUrl }, links: { html: url } }) => ({
+    ({
+      id,
+      description,
+      urls: { regular: imageUrl },
+      links: { html: url },
+    }) => ({
       id,
       description,
       url,
       imageUrl,
     })
   );
+
+  for (let index = 0; index < filteredData.length; index++) {
+    const { imageUrl } = filteredData[index];
+
+    // eslint-disable-next-line
+    const { path, placeholder } = await downloadImageGeneratePlaceholder(
+      imageUrl,
+      'jpg'
+    );
+
+    filteredData[index].imagePath = path;
+    filteredData[index].placeholderUri = placeholder;
+  }
 
   return filteredData;
 }

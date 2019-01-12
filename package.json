@@ -17,9 +17,12 @@
     "facepaint": "^1.2.1",
     "formik": "^1.4.1",
     "image-downloader": "^3.4.2",
+    "lqip": "^2.1.0",
+    "md5": "^2.2.1",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-hot-loader": "^4.3.12",
+    "react-progressive-image": "^0.6.0",
     "react-static": "^6.0.18",
     "request": "^2.88.0",
     "xml2js": "^0.4.19"
