@@ -179,8 +179,8 @@ async function getGithubData() {
   return data.data.user.repositoriesContributedTo.nodes;
 }
 
-const filterGoodreads = data =>
-  data.GoodreadsResponse.reviews[0].review.map(
+async function filterGoodreads(data) {
+  const filteredData = data.GoodreadsResponse.reviews[0].review.map(
     ({
       book: [
         {
@@ -210,20 +210,38 @@ const filterGoodreads = data =>
     })
   );
 
+  for (let index = 0; index < filteredData.length; index++) {
+    const { imageUrl } = filteredData[index];
+
+    // eslint-disable-next-line
+    const { path, placeholder } = await downloadImageGeneratePlaceholder(
+      imageUrl,
+      'jpg'
+    );
+
+    filteredData[index].imagePath = path;
+    filteredData[index].placeholderUri = placeholder;
+  }
+
+  return filteredData;
+}
+
 async function getGoodreadsData() {
   const { data: readXml } = await axios.get(
     `https://www.goodreads.com/review/list?v=2&id=49614500&shelf=read&per_page=200&key=${
       process.env.GOODREADS_KEY
     }`
   );
-  const read = filterGoodreads(await parseXml(readXml));
+  const read = await filterGoodreads(await parseXml(readXml));
 
   const { data: currentlyReadingXml } = await axios.get(
     `https://www.goodreads.com/review/list?v=2&id=49614500&shelf=currently-reading&per_page=200&key=${
       process.env.GOODREADS_KEY
     }`
   );
-  const currentlyReading = filterGoodreads(await parseXml(currentlyReadingXml));
+  const currentlyReading = await filterGoodreads(
+    await parseXml(currentlyReadingXml)
+  );
 
   return {
     read,
@@ -260,6 +278,19 @@ async function getSpotifyData() {
       imageUrl,
     })
   );
+
+  for (let index = 0; index < filteredData.length; index++) {
+    const { imageUrl } = filteredData[index];
+
+    // eslint-disable-next-line
+    const { path, placeholder } = await downloadImageGeneratePlaceholder(
+      imageUrl,
+      'jpg'
+    );
+
+    filteredData[index].imagePath = path;
+    filteredData[index].placeholderUri = placeholder;
+  }
 
   return filteredData;
 }

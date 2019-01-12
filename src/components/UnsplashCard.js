@@ -3,9 +3,9 @@ import ProgressiveImage from 'react-progressive-image';
 import { Card } from './Card';
 
 export const UnsplashCard = ({
-  photo: { description, url, imagePath, placeholderUri },
+  photo: { description, url, imageUrl, placeholderUri },
 }) => (
-  <ProgressiveImage src={imagePath} placeholder={placeholderUri}>
+  <ProgressiveImage src={imageUrl} placeholder={placeholderUri}>
     {src => (
       <Card
         component="a"
