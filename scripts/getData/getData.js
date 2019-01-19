@@ -25,7 +25,7 @@ function logOutput(error, stdout, stderr) {
 }
 
 exec(
-  'node ./scripts/data/getFoursquareData.js',
+  'node ./scripts/getData/getFoursquareData.js',
   {
     env: process.env,
   },
@@ -33,7 +33,7 @@ exec(
 )
 
 exec(
-  'node ./scripts/data/getGithubData.js',
+  'node ./scripts/getData/getGithubData.js',
   {
     env: process.env,
   },
@@ -41,7 +41,7 @@ exec(
 )
 
 exec(
-  'node ./scripts/data/getGoodreadsData.js',
+  'node ./scripts/getData/getGoodreadsData.js',
   {
     env: process.env,
   },
@@ -49,7 +49,7 @@ exec(
 )
 
 exec(
-  'node ./scripts/data/getSpotifyData.js',
+  'node ./scripts/getData/getSpotifyData.js',
   {
     env: process.env,
   },
@@ -57,7 +57,7 @@ exec(
 )
 
 exec(
-  'node ./scripts/data/getUnsplashData.js',
+  'node ./scripts/getData/getUnsplashData.js',
   {
     env: process.env,
   },
