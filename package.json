@@ -1,42 +1,59 @@
 {
   "name": "personal-site",
   "private": true,
-  "scripts": {
-    "start": "react-static start",
-    "stage": "react-static build --staging",
-    "build": "react-static build",
-    "bundle": "react-static bundle",
-    "export": "react-static export",
-    "serve": "serve dist -p 3000 -s",
-    "icons": "svgr --template svgrTemplate.js -d ./src/components/Icon ./icons"
-  },
+  "description": "My personal website",
+  "version": "0.1.0",
+  "author": "Jack Cross",
   "dependencies": {
-    "@emotion/core": "^10.0.5",
-    "@reach/router": "^1.2.1",
+    "@emotion/core": "^10.0.6",
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
     "facepaint": "^1.2.1",
-    "formik": "^1.4.1",
+    "formik": "^1.4.2",
+    "fs-extra": "^7.0.1",
+    "gatsby": "2.0.51",
+    "gatsby-image": "^2.0.20",
+    "gatsby-plugin-emotion": "^4.0.1",
+    "gatsby-plugin-favicon": "^3.1.5",
+    "gatsby-plugin-google-analytics": "^2.0.9",
+    "gatsby-plugin-manifest": "^2.0.9",
+    "gatsby-plugin-offline": "2.0.10",
+    "gatsby-plugin-react-helmet": "^3.0.2",
+    "gatsby-plugin-sharp": "^2.0.14",
+    "gatsby-source-filesystem": "^2.0.8",
+    "gatsby-transformer-json": "^2.1.7",
+    "gatsby-transformer-sharp": "^2.1.8",
     "image-downloader": "^3.4.2",
-    "lqip": "^2.1.0",
     "md5": "^2.2.1",
-    "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2",
-    "react-hot-loader": "^4.3.12",
-    "react-progressive-image": "^0.6.0",
-    "react-static": "^6.0.18",
-    "request": "^2.88.0",
+    "normalize.css": "^8.0.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1",
+    "react-helmet": "^5.2.0",
     "xml2js": "^0.4.19"
   },
-  "devDependencies": {
-    "@emotion/babel-preset-css-prop": "^10.0.5",
-    "@svgr/cli": "^4.1.0",
-    "babel-plugin-emotion": "^10.0.5",
-    "eslint-config-react-tools": "1.x.x",
-    "serve": "10.1.1"
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run data && gatsby build",
+    "develop": "gatsby develop",
+    "start": "npm run develop",
+    "format": "prettier --write \"src/**/*.js\"",
+    "icons": "svgr --template ./scripts/svgrTemplate.js -d ./src/components/Icon ./icons",
+    "data": "node ./scripts/data/getData.js"
   },
-  "resolutions": {
-    "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2"
+  "devDependencies": {
+    "@svgr/cli": "^4.1.0",
+    "babel-plugin-emotion": "^10.0.6",
+    "prettier": "^1.15.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
