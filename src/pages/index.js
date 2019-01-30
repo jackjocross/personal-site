@@ -104,7 +104,16 @@ const Index = ({
           <SpotifyCard key={artist.id} artist={artist} />
         ))}
       </SummaryList>
-      <SummaryList emoji="📖" title="What I'm" titleStrong="Reading">
+      <SummaryList
+        emoji="📖"
+        title="What I'm"
+        titleStrong="Reading"
+        css={{
+          '& ul': {
+            alignItems: 'center',
+          },
+        }}
+      >
         {combineDataImages(currentlyReading, goodreadsImages).map(book => (
           <GoodreadsCard key={book.id} book={book} />
         ))}
@@ -211,8 +220,8 @@ export const query = graphql`
             }
           }
           childImageSharp {
-            fixed(width: 240, height: 400) {
-              ...GatsbyImageSharpFixed
+            fluid {
+              ...GatsbyImageSharpFluid
               originalName
             }
           }

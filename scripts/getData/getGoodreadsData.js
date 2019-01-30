@@ -45,6 +45,11 @@ async function filterGoodreads(data) {
 
   for (let index = 0; index < filteredData.length; index++) {
     const { imageUrl: url } = filteredData[index]
+
+    if (url.includes('nophoto')) {
+      continue
+    }
+
     const imagePath = `goodreads-${md5(url)}.jpg`
 
     await image({

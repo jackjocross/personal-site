@@ -1,5 +1,5 @@
-import React from 'react';
-import { theme } from '../theme';
+import React from 'react'
+import { theme } from '../theme'
 
 const offsetPadding = theme.mq({
   paddingLeft: [
@@ -14,7 +14,7 @@ const offsetPadding = theme.mq({
     theme.space.large,
     theme.space.xlarge,
   ],
-});
+})
 
 const offsetMargin = theme.mq({
   marginLeft: [
@@ -29,7 +29,7 @@ const offsetMargin = theme.mq({
     `-${theme.space.large}`,
     `-${theme.space.xlarge}`,
   ],
-});
+})
 
 export const HorizontalList = ({ title, children, ...rest }) => (
   <div css={offsetPadding} {...rest}>
@@ -87,4 +87,4 @@ export const HorizontalList = ({ title, children, ...rest }) => (
       </div>
     </div>
   </div>
-);
+)

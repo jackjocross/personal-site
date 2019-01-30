@@ -4,12 +4,15 @@ export function combineDataImages(data, images) {
       acc,
       {
         node: {
-          childImageSharp: { fixed },
+          childImageSharp: { fixed, fluid },
         },
       }
-    ) => ({ ...acc, [fixed.originalName]: fixed }),
+    ) => ({
+      ...acc,
+      [fixed ? fixed.originalName : fluid.originalName]: { fixed, fluid },
+    }),
     {}
   )
 
-  return data.map(data => ({ ...data, fixed: imageMap[data.imagePath] }))
+  return data.map(data => ({ ...data, ...imageMap[data.imagePath] }))
 }
