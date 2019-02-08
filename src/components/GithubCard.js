@@ -1,16 +1,18 @@
-import React from 'react';
-import { theme } from '../theme';
-import { LinkAreaAnchor } from './LinkAreaAnchor';
-import { Card } from './Card';
+import React from 'react'
+import { theme } from '../theme'
+import { LinkAreaAnchor } from './LinkAreaAnchor'
+import { Card } from './Card'
 
 export const GithubCard = ({ repo: { name, description, url, owner } }) => (
   <Card
-    css={{
-      border: `1px solid ${theme.color.cloud}`,
-      padding: theme.space.small,
-      width: 200,
-      height: `calc(100% - 2 * ${theme.space.small})`,
-    }}
+    css={[
+      {
+        border: `1px solid ${theme.color.cloud}`,
+        padding: theme.space.small,
+        height: `calc(100% - 2 * ${theme.space.small})`,
+      },
+      theme.mq({ width: [180, 180, 200] }),
+    ]}
   >
     <div css={{ marginBottom: theme.space.medium }}>
       <LinkAreaAnchor
@@ -49,4 +51,4 @@ export const GithubCard = ({ repo: { name, description, url, owner } }) => (
     </div>
     <div>{description}</div>
   </Card>
-);
+)

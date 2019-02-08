@@ -6,13 +6,22 @@ import { Card } from './Card'
 
 export const FoursquareCard = ({ checkin: { id, name, imagePath, fixed } }) => (
   <Card
-    css={{
-      position: 'relative',
-      width: 320,
-      height: 320,
-    }}
+    css={[
+      {
+        position: 'relative',
+      },
+      theme.mq({ width: [220, 220, 320], height: [220, 220, 320] }),
+    ]}
   >
-    <Img fixed={fixed} style={{ position: 'absolute', zIndex: -1 }} />
+    <Img
+      fixed={fixed}
+      style={{
+        position: 'absolute',
+        zIndex: -1,
+        width: '100%',
+        height: '100%',
+      }}
+    />
     <div
       css={{
         position: 'absolute',

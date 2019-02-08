@@ -12,12 +12,21 @@ export const GoodreadsCard = ({
   return (
     <Card
       css={{
-        border: imagePath ? 'none' : `1px solid ${theme.color.cloud}`,
-        padding: imagePath ? 0 : theme.space.small,
         width: imagePath ? 240 : 210,
-        height: imagePath ? undefined : 335,
-        display: 'inline-block',
+        height: imagePath ? undefined : 305,
       }}
+      css={[
+        {
+          position: 'relative',
+          display: 'inline-block',
+
+          border: imagePath ? 'none' : `1px solid ${theme.color.cloud}`,
+          padding: imagePath ? 0 : theme.space.small,
+        },
+        imagePath
+          ? theme.mq({ width: [200, 200, 240] })
+          : theme.mq({ width: [180, 180, 210], height: [250, 250, 305] }),
+      ]}
     >
       {imagePath && (
         <Img
