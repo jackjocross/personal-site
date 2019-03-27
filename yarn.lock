@@ -5830,11 +5830,6 @@ gatsby-plugin-react-helmet@^3.0.2:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-gatsby-plugin-remove-serviceworker@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-remove-serviceworker/-/gatsby-plugin-remove-serviceworker-1.0.0.tgz#9fb433bc8bd766e14e1d3711c4ac6f051e1dff7c"
-  integrity sha1-n7QzvIvXZuFOHTcRxKxvBR4d/3w=
-
 gatsby-plugin-sharp@^2.0.14:
   version "2.0.16"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-sharp/-/gatsby-plugin-sharp-2.0.16.tgz#3f65fce65a0ec33a533e909706d3638a84fae2e7"
@@ -5885,11 +5880,6 @@ gatsby-source-filesystem@^2.0.8:
     slash "^1.0.0"
     valid-url "^1.0.9"
     xstate "^3.1.0"
-
-"gatsby-source-foursquare-checkins@file:./plugins/gatsby-source-foursquare-checkins/":
-  version "1.0.0"
-  dependencies:
-    axios "^0.18.0"
 
 gatsby-transformer-json@^2.1.7:
   version "2.1.7"

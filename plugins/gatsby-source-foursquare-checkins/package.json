@@ -1,8 +1,0 @@
-{
-  "name": "gatsby-source-foursquare-checkins",
-  "version": "1.0.0",
-  "license": "MIT",
-  "dependencies": {
-    "axios": "^0.18.0"
-  }
-}

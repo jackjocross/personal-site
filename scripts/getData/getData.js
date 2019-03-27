@@ -25,6 +25,14 @@ function logOutput(error, stdout, stderr) {
 }
 
 exec(
+  'node ./scripts/getData/getFoursquareData.js',
+  {
+    env: process.env,
+  },
+  logOutput
+)
+
+exec(
   'node ./scripts/getData/getGithubData.js',
   {
     env: process.env,
