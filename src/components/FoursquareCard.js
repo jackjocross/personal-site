@@ -4,7 +4,17 @@ import { theme } from '../theme'
 import { LinkAreaAnchor } from './LinkAreaAnchor'
 import { Card } from './Card'
 
-export const FoursquareCard = ({ checkin: { id, name, imagePath, fixed } }) => (
+export const FoursquareCard = ({
+  checkin: {
+    id,
+    venue: { name },
+    childrenFile: [
+      {
+        childImageSharp: { fluid },
+      },
+    ],
+  },
+}) => (
   <Card
     css={[
       {
@@ -14,7 +24,7 @@ export const FoursquareCard = ({ checkin: { id, name, imagePath, fixed } }) => (
     ]}
   >
     <Img
-      fixed={fixed}
+      fixed={fluid}
       style={{
         position: 'absolute',
         zIndex: -1,
