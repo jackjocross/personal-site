@@ -49,14 +49,7 @@ const Index = ({
         ...goodreadsImages
       ],
     },
-    foursquare: {
-      edges: [
-        {
-          node: { childrenJson: foursquareData },
-        },
-        ...foursquareImages
-      ],
-    },
+    foursquare: { edges },
   },
 }) => (
   <>
@@ -123,8 +116,8 @@ const Index = ({
         ))}
       </SummaryList>
       <SummaryList emoji="🗺" title="Where I'm" titleStrong="Going">
-        {combineDataImages(foursquareData, foursquareImages).map(checkin => (
-          <FoursquareCard key={checkin.id} checkin={checkin} />
+        {edges.map(checkin => (
+          <FoursquareCard key={checkin.node.id} checkin={checkin.node} />
         ))}
       </SummaryList>
     </div>
@@ -228,20 +221,17 @@ export const query = graphql`
         }
       }
     }
-    foursquare: allFile(filter: { relativePath: { glob: "foursquare*" } }) {
+    foursquare: allFoursquareCheckin {
       edges {
         node {
-          childrenJson {
-            id
+          venue {
             name
-            lat
-            lng
-            imagePath
           }
-          childImageSharp {
-            fixed(width: 320, height: 320) {
-              ...GatsbyImageSharpFixed
-              originalName
+          childrenFile {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
             }
           }
         }

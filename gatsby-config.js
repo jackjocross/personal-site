@@ -1,3 +1,11 @@
+const { config } = require('dotenv')
+
+config()
+
+const oneWeekAgo = new Date()
+oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
+const oneWeekAgoSeconds = Math.floor(oneWeekAgo.getTime() / 1000)
+
 module.exports = {
   siteMetadata: {
     title: 'Jack Cross',
@@ -5,7 +13,6 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',
-    'gatsby-plugin-offline',
     {
       resolve: 'gatsby-transformer-json',
       options: {
@@ -14,6 +21,20 @@ module.exports = {
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    {
+      resolve: 'gatsby-source-foursquare-checkins',
+      options: {
+        beforeTimestamp: oneWeekAgoSeconds,
+        token: process.env.FOURSQUARE_ACCESS_TOKEN,
+        staticMap: {
+          zoom: '15',
+          size: '400x400',
+          scale: '2',
+          maptype: 'roadmap',
+          key: process.env.GOOGLE_KEY,
+        },
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -63,5 +84,6 @@ module.exports = {
         },
       },
     },
+    'gatsby-plugin-remove-serviceworker',
   ],
 }
