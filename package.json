@@ -26,12 +26,15 @@
     "gatsby-transformer-json": "^2.1.7",
     "gatsby-transformer-sharp": "^2.1.8",
     "image-downloader": "^3.4.2",
+    "just-throttle": "^1.1.0",
     "md5": "^2.2.1",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.6.2",
     "react": "^16.8.0-alpha.1",
+    "react-color": "^2.17.3",
     "react-dom": "^16.8.0-alpha.1",
     "react-helmet": "^5.2.0",
+    "react-tilt": "^0.1.4",
     "xml2js": "^0.4.19"
   },
   "keywords": [

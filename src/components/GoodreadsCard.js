@@ -1,83 +1,107 @@
-import React from 'react'
 import Img from 'gatsby-image'
-import { LinkAreaAnchor } from './LinkAreaAnchor'
+import React from 'react'
 import { theme } from '../theme'
 import { Card } from './Card'
+import { LinkAreaAnchor } from './LinkAreaAnchor'
 import { VisuallyHidden } from './VisuallyHidden'
+import { responsiveSpace } from './HorizontalList'
 
 export const GoodreadsCard = ({
   book: { imagePath, bookLink, title, authorLink, name, fluid },
 }) => {
   const Wrapper = imagePath ? VisuallyHidden : React.Fragment
   return (
-    <Card
+    <div
       css={{
-        width: imagePath ? 240 : 210,
-        height: imagePath ? undefined : 305,
+        marginTop: -25,
+        paddingBottom: 110,
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
       }}
-      css={[
-        {
-          position: 'relative',
-          display: 'inline-block',
-
-          border: imagePath ? 'none' : `1px solid ${theme.color.cloud}`,
-          padding: imagePath ? 0 : theme.space.small,
-        },
-        imagePath
-          ? theme.mq({ width: [200, 200, 240] })
-          : theme.mq({ width: [180, 180, 210], height: [250, 250, 305] }),
-      ]}
     >
-      {imagePath && (
-        <Img
-          fluid={fluid}
-          style={{
-            display: 'block',
-          }}
-          imgStyle={{
-            height: '100%',
-            width: '100%',
-            borderRadius: theme.borderRadius,
-          }}
-        />
-      )}
-      <Wrapper>
-        <div css={{ marginBottom: theme.space.medium }}>
-          <LinkAreaAnchor
-            href={bookLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            css={{
-              fontSize: theme.fontSize.large,
-              textDecoration: 'none',
-              ':hover': {
-                textDecoration: 'underline',
-              },
-              color: theme.color.black,
-              wordBreak: 'break-word',
-              fontWeight: 500,
+      <Card
+        css={[
+          {
+            position: 'relative',
+            display: 'inline-block',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
+            border: `1px solid ${theme.color.cloud}`,
+            padding: imagePath ? 0 : theme.space.medium,
+          },
+          imagePath
+            ? theme.mq({
+                width: [
+                  `calc(100vw - 2 * ${responsiveSpace[0]})`,
+                  240,
+                  240,
+                  240,
+                ],
+              })
+            : theme.mq({
+                width: [
+                  `calc(100vw - 2 * ${responsiveSpace[0]} - ${
+                    imagePath ? 0 : `2 * ${theme.space.medium}`
+                  })`,
+                  210,
+                  210,
+                  210,
+                ],
+                height: [400, 305, 305, 305],
+              }),
+        ]}
+      >
+        {imagePath && (
+          <Img
+            fluid={fluid}
+            style={{
+              display: 'block',
             }}
-          >
-            {title}
-          </LinkAreaAnchor>
-        </div>
-        <div>
-          <a
-            href={authorLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            css={{
-              color: theme.color.gray,
-              textDecoration: 'none',
-              ':hover': {
-                textDecoration: 'underline',
-              },
+            imgStyle={{
+              height: '100%',
+              width: '100%',
+              borderRadius: theme.borderRadius,
             }}
-          >
-            {name}
-          </a>
-        </div>
-      </Wrapper>
-    </Card>
+          />
+        )}
+        <Wrapper>
+          <div css={{ marginBottom: theme.space.medium }}>
+            <LinkAreaAnchor
+              href={bookLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              css={{
+                fontSize: theme.fontSize.large,
+                textDecoration: 'none',
+                ':hover': {
+                  textDecoration: 'underline',
+                },
+                color: theme.color.black,
+                wordBreak: 'break-word',
+                fontWeight: 500,
+              }}
+            >
+              {title}
+            </LinkAreaAnchor>
+          </div>
+          <div>
+            <a
+              href={authorLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              css={{
+                color: theme.color.gray,
+                textDecoration: 'none',
+                ':hover': {
+                  textDecoration: 'underline',
+                },
+              }}
+            >
+              {name}
+            </a>
+          </div>
+        </Wrapper>
+      </Card>
+    </div>
   )
 }

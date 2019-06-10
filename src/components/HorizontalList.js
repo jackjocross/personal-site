@@ -1,90 +1,71 @@
 import React from 'react'
 import { theme } from '../theme'
 
-const offsetPadding = theme.mq({
-  paddingLeft: [
-    theme.space.small,
-    theme.space.small,
-    theme.space.large,
-    theme.space.xlarge,
-  ],
-  paddingRight: [
-    theme.space.small,
-    theme.space.small,
-    theme.space.large,
-    theme.space.xlarge,
-  ],
-})
+export const responsiveSpace = [
+  theme.space.medium,
+  theme.space.medium,
+  theme.space.large,
+  theme.space.xlarge,
+]
 
-const offsetMargin = theme.mq({
-  marginLeft: [
-    `-${theme.space.small}`,
-    `-${theme.space.small}`,
-    `-${theme.space.large}`,
-    `-${theme.space.xlarge}`,
-  ],
-  marginRight: [
-    `-${theme.space.small}`,
-    `-${theme.space.small}`,
-    `-${theme.space.large}`,
-    `-${theme.space.xlarge}`,
-  ],
-})
-
-export const HorizontalList = ({ title, children, ...rest }) => (
-  <div css={offsetPadding} {...rest}>
+export const HorizontalList = ({ children }) => (
+  <>
     <div
       css={[
         {
-          overflowY: 'hidden',
-          overflowX: 'visible',
+          overflow: 'hidden',
         },
-        offsetPadding,
-        offsetMargin,
       ]}
     >
-      <div css={{ marginBottom: theme.space.small }}>{title}</div>
-      <div
+      <ul
         css={[
           {
-            overflow: 'auto',
-            paddingBottom: 30,
+            display: 'flex',
+            marginLeft: 0,
+            marginRight: 0,
+            paddingLeft: 0,
+            paddingRight: 0,
             marginBottom: -30,
+            paddingBottom: 30,
+            width: '100%',
+            overflowY: 'hidden',
+            overflowX: 'visible',
+            scrollSnapType: 'x mandatory',
             WebkitOverflowScrolling: 'touch',
             '::-webkit-scrollbar': {
               WebkitAppearance: 'none !important',
               display: 'none !important',
             },
           },
-          offsetPadding,
-          offsetMargin,
+          theme.mq({
+            scrollPaddingLeft: responsiveSpace,
+            'li:first-child': {
+              paddingLeft: responsiveSpace,
+            },
+            'li:last-child': {
+              paddingRight: responsiveSpace,
+            },
+          }),
         ]}
       >
-        <ul
-          css={[
-            {
-              display: 'flex',
-              whiteSpace: 'nowrap',
-              float: 'left',
-            },
-            offsetPadding,
-            offsetMargin,
-          ]}
-        >
-          {React.Children.map(children, child => (
-            <li
-              css={theme.mq({
+        {React.Children.map(children, child => (
+          <li
+            css={[
+              {
                 display: 'inline-block',
+                scrollSnapAlign: 'start',
+              },
+              theme.mq({
                 ':not(:last-child)': {
-                  marginRight: [theme.space.xsmall, theme.space.small],
+                  marginRight: [theme.space.xsmall, theme.space.medium],
                 },
-              })}
-            >
-              {child}
-            </li>
-          ))}
-        </ul>
-      </div>
+              }),
+            ]}
+          >
+            {child}
+          </li>
+        ))}
+      </ul>
     </div>
-  </div>
+  </>
 )

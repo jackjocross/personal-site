@@ -1,22 +1,24 @@
-import React from 'react';
-import { theme } from '../theme';
+import React from 'react'
+import { theme } from '../theme'
 
 export const Input = ({ component: Component = 'input', ...rest }) => (
   <Component
     css={{
       display: 'block',
-      width: 'calc(100% - 2em)',
-      borderRadius: 6,
-      border: `1px solid ${theme.color.cloud}`,
-      fontSize: 'inherit',
+      width: 'calc(100% - 1.5rem)',
+      borderRadius: theme.borderRadius,
+      border: `2px solid ${theme.color.gray}`,
+      fontSize: theme.fontSize.medium,
       fontFamily: theme.fontFamily,
-      padding: '.8em 1em',
-      background: theme.color.white,
+      padding: '.85rem .75rem',
+      background: theme.color.cloud,
       ':focus': {
         outline: 'none',
-        boxShadow: `0 0 0 2px ${
-          theme.color.platinum
-        }, 0 0 0 4px rgba(0, 0, 0, .3)`,
+        border: `2px solid ${theme.color.purple}`,
+        background: theme.color.white,
+      },
+      ':hover': {
+        background: theme.color.white,
       },
       '::placeholder': {
         color: theme.color.platinum,
@@ -25,4 +27,4 @@ export const Input = ({ component: Component = 'input', ...rest }) => (
     }}
     {...rest}
   />
-);
+)

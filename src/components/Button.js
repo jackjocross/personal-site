@@ -1,16 +1,16 @@
-import React from 'react';
-import { theme } from '../theme';
+import React from 'react'
+import { theme } from '../theme'
 
 export const Button = props => (
   <button
     css={{
-      background: theme.color.pink,
+      background: theme.color.purple,
       color: theme.color.white,
       borderRadius: theme.borderRadius,
       fontFamily: theme.fontFamily,
-      fontSize: 'inherit',
+      fontSize: theme.fontSize.medium,
       border: 'none',
-      padding: theme.space.small,
+      padding: '.85rem .75rem',
       overflow: 'hidden',
       cursor: 'pointer',
       display: 'flex',
@@ -30,4 +30,4 @@ export const Button = props => (
     }}
     {...props}
   />
-);
+)
