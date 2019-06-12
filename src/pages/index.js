@@ -207,7 +207,7 @@ export const query = graphql`
           }
           childImageSharp {
             fixed(width: 320, height: 320) {
-              ...GatsbyImageSharpFixed
+              ...GatsbyImageSharpFixed_withWebp_noBase64
               originalName
             }
           }
@@ -225,7 +225,7 @@ export const query = graphql`
           }
           childImageSharp {
             fixed(width: 320, height: 320) {
-              ...GatsbyImageSharpFixed
+              ...GatsbyImageSharpFixed_withWebp_noBase64
               originalName
             }
           }
@@ -255,7 +255,7 @@ export const query = graphql`
           }
           childImageSharp {
             fluid {
-              ...GatsbyImageSharpFluid
+              ...GatsbyImageSharpFluid_withWebp_noBase64
               originalName
             }
           }
@@ -271,7 +271,7 @@ export const query = graphql`
           childrenFile {
             childImageSharp {
               fluid {
-                ...GatsbyImageSharpFluid
+                ...GatsbyImageSharpFluid_withWebp_noBase64
               }
             }
           }

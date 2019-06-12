@@ -1,5 +1,5 @@
 import React from 'react'
-import Img from 'gatsby-image'
+import { Image } from './Image'
 import { theme } from '../theme'
 import { LinkAreaAnchor } from './LinkAreaAnchor'
 import { Card } from './Card'
@@ -36,7 +36,7 @@ export const FoursquareCard = ({
           },
         ]}
       />
-      <Img
+      <Image
         fixed={fluid}
         style={{
           position: 'absolute',

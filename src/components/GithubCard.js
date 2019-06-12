@@ -10,20 +10,20 @@ export const GithubCard = ({ repo: { name, description, url, owner } }) => (
       {
         paddingTop: 10,
         paddingBottom: 35,
-        height: `calc(100% - 2 * ${theme.space.small})`,
+        height: `calc(100% - 45px)`,
         '> div': {
           height: '100%',
         },
       },
       theme.mq({
-        width: [`calc(100vw - 2 * ${responsiveSpace[0]})`, 200, 200, 200],
+        width: [`calc(80vw - 2 * ${responsiveSpace[0]})`, 200, 200, 200],
       }),
     ]}
   >
     <Card
       css={[
         {
-          height: `calc(100% - 2 * ${theme.space.small})`,
+          height: '100%',
           boxShadow: '0 12px 30px -12px rgba(0, 0, 0, 0.15)',
           border: `1px solid ${theme.color.cloud}`,
           borderRadius: theme.borderRadius,

@@ -1,5 +1,5 @@
 import React from 'react'
-import Img from 'gatsby-image'
+import { Image } from './Image'
 import { Card } from './Card'
 import { theme } from '../theme'
 import { responsiveSpace } from './HorizontalList'
@@ -32,8 +32,9 @@ export const UnsplashCard = ({
           },
         ]}
       />
-      <Img
+      <Image
         fixed={fixed}
+        loading="lazy"
         style={{
           position: 'absolute',
           zIndex: -1,

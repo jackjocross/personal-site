@@ -1,9 +1,9 @@
-import Img from 'gatsby-image'
 import React from 'react'
 import { theme } from '../theme'
 import { Card } from './Card'
 import { LinkAreaAnchor } from './LinkAreaAnchor'
 import { responsiveSpace } from './HorizontalList'
+import { Image } from './Image'
 
 export const SpotifyCard = ({
   artist: { name, spotifyUrl, imagePath, fixed },
@@ -28,7 +28,7 @@ export const SpotifyCard = ({
           },
         ]}
       />
-      <Img
+      <Image
         fixed={fixed}
         style={{
           position: 'absolute',

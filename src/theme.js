@@ -13,7 +13,7 @@ const color = {
 const borderRadius = 5
 
 const mq = facepaint([
-  '@media(min-width: 400px)',
+  '@media(min-width: 450px)',
   '@media(min-width: 800px)',
   '@media(min-width: 1200px)',
   '@media(min-width: 1600px)',

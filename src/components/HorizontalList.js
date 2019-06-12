@@ -38,7 +38,7 @@ export const HorizontalList = ({ children }) => (
             },
           },
           theme.mq({
-            scrollPaddingLeft: responsiveSpace,
+            scrollPaddingLeft: [0, ...responsiveSpace.slice(1)],
             'li:first-child': {
               paddingLeft: responsiveSpace,
             },
@@ -53,9 +53,9 @@ export const HorizontalList = ({ children }) => (
             css={[
               {
                 display: 'inline-block',
-                scrollSnapAlign: 'start',
               },
               theme.mq({
+                scrollSnapAlign: ['center', 'start', 'start', 'start'],
                 ':not(:last-child)': {
                   marginRight: [theme.space.xsmall, theme.space.medium],
                 },

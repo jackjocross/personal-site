@@ -1,4 +1,4 @@
-import Img from 'gatsby-image'
+import { Image } from './Image'
 import React from 'react'
 import { theme } from '../theme'
 import { Card } from './Card'
@@ -26,13 +26,12 @@ export const GoodreadsCard = ({
             position: 'relative',
             display: 'inline-block',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
-            border: `1px solid ${theme.color.cloud}`,
             padding: imagePath ? 0 : theme.space.medium,
           },
           imagePath
             ? theme.mq({
                 width: [
-                  `calc(100vw - 2 * ${responsiveSpace[0]})`,
+                  `calc(80vw - 2 * ${responsiveSpace[0]})`,
                   240,
                   240,
                   240,
@@ -40,19 +39,20 @@ export const GoodreadsCard = ({
               })
             : theme.mq({
                 width: [
-                  `calc(100vw - 2 * ${responsiveSpace[0]} - ${
+                  `calc(80vw - 2 * ${responsiveSpace[0]} - ${
                     imagePath ? 0 : `2 * ${theme.space.medium}`
                   })`,
                   210,
                   210,
                   210,
                 ],
-                height: [400, 305, 305, 305],
+                height: 305,
+                border: `1px solid ${theme.color.cloud}`,
               }),
         ]}
       >
         {imagePath && (
-          <Img
+          <Image
             fluid={fluid}
             style={{
               display: 'block',
