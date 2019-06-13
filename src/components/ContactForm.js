@@ -1,12 +1,13 @@
-import React from 'react';
-import { Formik, Field, Form } from 'formik';
-import { Button } from './Button';
-import { theme } from '../theme';
-import { Input } from './Input';
+import { Field, Form, Formik } from 'formik'
+import React from 'react'
+import { theme } from '../theme'
+import { Button } from './Button'
+import { Input } from './Input'
+import { responsiveSpace } from './HorizontalList'
 
 export const ContactForm = () => {
-  const [submitted, setSubmitted] = React.useState(false);
-  const [error, setError] = React.useState(false);
+  const [submitted, setSubmitted] = React.useState(false)
+  const [error, setError] = React.useState(false)
 
   return (
     <div
@@ -14,12 +15,7 @@ export const ContactForm = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: [
-          theme.space.small,
-          theme.space.small,
-          theme.space.large,
-          theme.space.xlarge,
-        ],
+        padding: `${theme.space.xxlarge} ${theme.space.medium}`,
         background: theme.color.black,
       }}
     >
@@ -33,9 +29,6 @@ export const ContactForm = () => {
           }}
         >
           I'll be in touch soon!
-          <span role="img" aria-label="Writing hand">
-            ✍️
-          </span>
         </div>
       ) : (
         <>
@@ -48,18 +41,10 @@ export const ContactForm = () => {
             }}
           >
             {error ? (
-              <>
-                Uh oh, something went wrong!
-                <span role="img" aria-label="Dead man">
-                  😵
-                </span>
-              </>
+              <div>Uh oh, something went wrong!</div>
             ) : (
               <>
-                Say Hello{' '}
-                <span role="img" aria-label="Waving hand">
-                  👋
-                </span>
+                Say <strong>Hello</strong>
               </>
             )}
           </div>
@@ -83,14 +68,14 @@ export const ContactForm = () => {
                       },
                       body: JSON.stringify(values),
                     }
-                  );
-                  setSubmitted(true);
+                  )
+                  setSubmitted(true)
                 } catch (e) {
-                  setError(true);
+                  setError(true)
                 }
               }}
               render={() => (
-                <Form>
+                <Form autoComplete="off">
                   <Field
                     name="name"
                     render={({ field }) => (
@@ -129,6 +114,7 @@ export const ContactForm = () => {
                         css={{
                           marginBottom: theme.space.small,
                           resize: 'vertical',
+                          minHeight: 150,
                         }}
                         {...field}
                       />
@@ -144,5 +130,5 @@ export const ContactForm = () => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
