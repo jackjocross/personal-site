@@ -7,8 +7,7 @@ import { responsiveSpace } from './HorizontalList'
 
 export const FoursquareCard = ({
   checkin: {
-    id,
-    venue: { name },
+    venue: { name, id },
     childrenFile: [
       {
         childImageSharp: { fluid },
