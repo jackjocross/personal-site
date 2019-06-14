@@ -39,10 +39,10 @@ export const HorizontalList = ({ children }) => (
           },
           theme.mq({
             scrollPaddingLeft: [0, ...responsiveSpace.slice(1)],
-            'li:first-child': {
+            'li:first-of-type': {
               paddingLeft: responsiveSpace,
             },
-            'li:last-child': {
+            'li:last-of-type': {
               paddingRight: responsiveSpace,
             },
           }),

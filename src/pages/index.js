@@ -156,12 +156,9 @@ const Index = ({
           ))}
         </SummaryList>
         <SummaryList title="Where I'm" titleStrong="Going">
-          {edges.map(
-            checkin =>
-              console.log({ checkin }) || (
-                <FoursquareCard key={checkin.node.id} checkin={checkin.node} />
-              )
-          )}
+          {edges.map(checkin => (
+            <FoursquareCard key={checkin.node.id} checkin={checkin.node} />
+          ))}
         </SummaryList>
       </div>
       <ContactForm />
