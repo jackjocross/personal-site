@@ -30,7 +30,7 @@ async function getUnsplashData() {
 
     await image({
       url,
-      dest: `./images/${imagePath}`,
+      dest: `./data-images/${imagePath}`,
     })
 
     filteredData[index].imagePath = imagePath

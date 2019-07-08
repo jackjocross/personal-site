@@ -7,9 +7,21 @@ import { VisuallyHidden } from './VisuallyHidden'
 import { responsiveSpace } from './HorizontalList'
 
 export const GoodreadsCard = ({
-  book: { imagePath, bookLink, title, authorLink, name, fluid },
+  book: {
+    hasCoverImage,
+    bookLink,
+    title,
+    authorLink,
+    name,
+    childrenFile: [
+      {
+        childImageSharp: { fluid },
+      },
+    ],
+  },
 }) => {
-  const Wrapper = imagePath ? VisuallyHidden : React.Fragment
+  console.log({ hasCoverImage })
+  const Wrapper = hasCoverImage ? VisuallyHidden : React.Fragment
   return (
     <div
       css={{
@@ -26,9 +38,9 @@ export const GoodreadsCard = ({
             position: 'relative',
             display: 'inline-block',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
-            padding: imagePath ? 0 : theme.space.medium,
+            padding: hasCoverImage ? 0 : theme.space.medium,
           },
-          imagePath
+          hasCoverImage
             ? theme.mq({
                 width: [
                   `calc(80vw - 2 * ${responsiveSpace[0]})`,
@@ -40,7 +52,7 @@ export const GoodreadsCard = ({
             : theme.mq({
                 width: [
                   `calc(80vw - 2 * ${responsiveSpace[0]} - ${
-                    imagePath ? 0 : `2 * ${theme.space.medium}`
+                    hasCoverImage ? 0 : `2 * ${theme.space.medium}`
                   })`,
                   210,
                   210,
@@ -51,7 +63,7 @@ export const GoodreadsCard = ({
               }),
         ]}
       >
-        {imagePath && (
+        {hasCoverImage && (
           <Image
             fluid={fluid}
             style={{

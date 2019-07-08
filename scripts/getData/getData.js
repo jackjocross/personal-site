@@ -7,8 +7,8 @@ config()
 fs.removeSync('./data')
 fs.mkdirSync('./data')
 
-fs.removeSync('./images')
-fs.mkdirSync('./images')
+fs.removeSync('./data-images')
+fs.mkdirSync('./data-images')
 
 function logOutput(error, stdout, stderr) {
   if (error) {
@@ -26,14 +26,6 @@ function logOutput(error, stdout, stderr) {
 
 exec(
   'node ./scripts/getData/getGithubData.js',
-  {
-    env: process.env,
-  },
-  logOutput
-)
-
-exec(
-  'node ./scripts/getData/getGoodreadsData.js',
   {
     env: process.env,
   },

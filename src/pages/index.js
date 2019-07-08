@@ -13,54 +13,67 @@ import { SummaryList } from '../components/SummaryList'
 import { UnsplashCard } from '../components/UnsplashCard'
 import { theme } from '../theme'
 import { combineDataImages } from '../utils/combineDataImages'
+import { Favicons } from '../components/Favicons'
 
 const Index = ({
   data: {
-    github: {
+    // github: {
+    //   edges: [
+    //     {
+    //       node: {
+    //         childrenJson: [github],
+    //       },
+    //     },
+    //   ],
+    // },
+    // unsplash: {
+    //   edges: [
+    //     {
+    //       node: { childrenJson: unsplashData },
+    //     },
+    //     ...unsplashImages
+    //   ],
+    // },
+    // spotify: {
+    //   edges: [
+    //     {
+    //       node: { childrenJson: spotifyData },
+    //     },
+    //     ...spotifyImages
+    //   ],
+    // },
+    // goodreads: {
+    //   edges: [
+    //     {
+    //       node: {
+    //         childrenJson: [{ currentlyReading, read }],
+    //       },
+    //     },
+    //     ...goodreadsImages
+    //   ],
+    // },
+    foursquare: { edges: checkins },
+    goodreads: { edges: books },
+    logo: {
       edges: [
         {
           node: {
-            childrenJson: [github],
+            childFavicon: { faviconElements },
           },
         },
       ],
     },
-    unsplash: {
-      edges: [
-        {
-          node: { childrenJson: unsplashData },
-        },
-        ...unsplashImages
-      ],
-    },
-    spotify: {
-      edges: [
-        {
-          node: { childrenJson: spotifyData },
-        },
-        ...spotifyImages
-      ],
-    },
-    goodreads: {
-      edges: [
-        {
-          node: {
-            childrenJson: [{ currentlyReading, read }],
-          },
-        },
-        ...goodreadsImages
-      ],
-    },
-    foursquare: { edges },
   },
 }) => {
+  console.log({ books })
   return (
     <>
+      <Favicons favicons={faviconElements} />
       <Global
         styles={{
           'html, body': {
             margin: 0,
-            fontFamily: theme.fontFamily,
+            fontFamily: theme.fontFamilyMono,
             fontSize: theme.fontSize.root,
             lineHeight: theme.lineHeight,
           },
@@ -119,7 +132,7 @@ const Index = ({
           margin: `${theme.space.medium} 0`,
         }}
       >
-        <SummaryList title="What I'm" titleStrong="Coding">
+        {/* <SummaryList title="What I'm" titleStrong="Coding">
           {github.pinned.map(repo => (
             <GithubCard key={repo.id} repo={repo} />
           ))}
@@ -137,7 +150,7 @@ const Index = ({
           {combineDataImages(spotifyData, spotifyImages).map(artist => (
             <SpotifyCard key={artist.id} artist={artist} />
           ))}
-        </SummaryList>
+        </SummaryList>*/}
         <SummaryList
           title="What I'm"
           titleStrong="Reading"
@@ -147,16 +160,21 @@ const Index = ({
             },
           }}
         >
-          {combineDataImages(currentlyReading, goodreadsImages).map(book => (
-            <GoodreadsCard key={book.id} book={book} />
-          ))}
+          {books
+            .filter(({ node: { shelf } }) => shelf === 'currently-reading')
+            .map(({ node: book }) => (
+              <GoodreadsCard key={book.id} book={book} />
+            ))}
+
           <ListBreak title="Read" />
-          {combineDataImages(read, goodreadsImages).map(book => (
-            <GoodreadsCard key={book.id} book={book} />
-          ))}
+          {books
+            .filter(({ node: { shelf } }) => shelf === 'read')
+            .map(({ node: book }) => (
+              <GoodreadsCard key={book.id} book={book} />
+            ))}
         </SummaryList>
         <SummaryList title="Where I'm" titleStrong="Going">
-          {edges.map(checkin => (
+          {checkins.map(checkin => (
             <FoursquareCard key={checkin.node.id} checkin={checkin.node} />
           ))}
         </SummaryList>
@@ -168,100 +186,6 @@ const Index = ({
 
 export const query = graphql`
   query IndexQuery {
-    github: allFile(filter: { relativePath: { glob: "github*" } }) {
-      edges {
-        node {
-          childrenJson {
-            pinned {
-              id
-              name
-              description
-              url
-              owner {
-                login
-                url
-              }
-            }
-            contributed {
-              id
-              name
-              description
-              url
-              owner {
-                login
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-    unsplash: allFile(filter: { relativePath: { glob: "unsplash*" } }) {
-      edges {
-        node {
-          childrenJson {
-            id
-            description
-            url
-            imagePath
-          }
-          childImageSharp {
-            fixed(width: 320, height: 320) {
-              ...GatsbyImageSharpFixed_withWebp_noBase64
-              originalName
-            }
-          }
-        }
-      }
-    }
-    spotify: allFile(filter: { relativePath: { glob: "spotify*" } }) {
-      edges {
-        node {
-          childrenJson {
-            id
-            name
-            spotifyUrl
-            imagePath
-          }
-          childImageSharp {
-            fixed(width: 320, height: 320) {
-              ...GatsbyImageSharpFixed_withWebp_noBase64
-              originalName
-            }
-          }
-        }
-      }
-    }
-    goodreads: allFile(filter: { relativePath: { glob: "goodreads*" } }) {
-      edges {
-        node {
-          childrenJson {
-            read {
-              id
-              title
-              bookLink
-              name
-              authorLink
-              imagePath
-            }
-            currentlyReading {
-              id
-              title
-              bookLink
-              name
-              authorLink
-              imagePath
-            }
-          }
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid_withWebp_noBase64
-              originalName
-            }
-          }
-        }
-      }
-    }
     foursquare: allFoursquareCheckin {
       edges {
         node {
@@ -275,6 +199,38 @@ export const query = graphql`
               fluid {
                 ...GatsbyImageSharpFluid_withWebp_noBase64
               }
+            }
+          }
+        }
+      }
+    }
+    goodreads: allGoodreadsBook {
+      edges {
+        node {
+          id
+          authorLink
+          bookLink
+          title
+          name
+          hasCoverImage
+          shelf
+          childrenFile {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp_noBase64
+              }
+            }
+          }
+        }
+      }
+    }
+    logo: allFile(filter: { name: { eq: "logo" } }) {
+      edges {
+        node {
+          childFavicon {
+            faviconElements {
+              props
+              type
             }
           }
         }
