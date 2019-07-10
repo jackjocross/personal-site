@@ -6,7 +6,15 @@ import { responsiveSpace } from './HorizontalList'
 import { Image } from './Image'
 
 export const SpotifyCard = ({
-  artist: { name, spotifyUrl, imagePath, fixed },
+  artist: {
+    name,
+    external_urls: { spotify },
+    childrenFile: [
+      {
+        childImageSharp: { fluid },
+      },
+    ],
+  },
 }) => (
   <div css={{ paddingTop: 10, paddingBottom: 70 }}>
     <Card
@@ -29,7 +37,7 @@ export const SpotifyCard = ({
         ]}
       />
       <Image
-        fixed={fixed}
+        fluid={fluid}
         style={{
           position: 'absolute',
           zIndex: -1,
@@ -49,7 +57,7 @@ export const SpotifyCard = ({
         css={{ position: 'absolute', bottom: 0, padding: theme.space.small }}
       >
         <LinkAreaAnchor
-          href={spotifyUrl}
+          href={spotify}
           target="_blank"
           rel="noopener noreferrer"
           css={{

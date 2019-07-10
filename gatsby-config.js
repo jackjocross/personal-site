@@ -36,6 +36,33 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-source-unsplash-user',
+      options: {
+        key: process.env.UNSPLASH_KEY,
+        user: 'crossprocess',
+      },
+    },
+    {
+      resolve: 'gatsby-source-spotify-top-artists',
+      options: {
+        refreshToken: process.env.SPOTIFY_REFRESH_TOKEN,
+        clientId: process.env.SPOTIFY_CLIENT_ID,
+        clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      },
+    },
+    {
+      resolve: 'gatsby-source-graphql',
+      options: {
+        typeName: 'GitHub',
+        fieldName: 'github',
+        url: 'https://api.github.com/graphql',
+        headers: {
+          // Learn about environment variables: https://gatsby.dev/env-vars
+          Authorization: `bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+        },
+      },
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',

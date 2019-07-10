@@ -12,48 +12,20 @@ import { SpotifyCard } from '../components/SpotifyCard'
 import { SummaryList } from '../components/SummaryList'
 import { UnsplashCard } from '../components/UnsplashCard'
 import { theme } from '../theme'
-import { combineDataImages } from '../utils/combineDataImages'
 import { Favicons } from '../components/Favicons'
 
 const Index = ({
   data: {
-    // github: {
-    //   edges: [
-    //     {
-    //       node: {
-    //         childrenJson: [github],
-    //       },
-    //     },
-    //   ],
-    // },
-    // unsplash: {
-    //   edges: [
-    //     {
-    //       node: { childrenJson: unsplashData },
-    //     },
-    //     ...unsplashImages
-    //   ],
-    // },
-    // spotify: {
-    //   edges: [
-    //     {
-    //       node: { childrenJson: spotifyData },
-    //     },
-    //     ...spotifyImages
-    //   ],
-    // },
-    // goodreads: {
-    //   edges: [
-    //     {
-    //       node: {
-    //         childrenJson: [{ currentlyReading, read }],
-    //       },
-    //     },
-    //     ...goodreadsImages
-    //   ],
-    // },
+    spotify: { edges: artists },
+    unsplash: { edges: images },
     foursquare: { edges: checkins },
     goodreads: { edges: books },
+    github: {
+      user: {
+        pinnedRepositories: { nodes: pinnedRepositories },
+        repositoriesContributedTo: { nodes: repositoriesContributedTo },
+      },
+    },
     logo: {
       edges: [
         {
@@ -65,7 +37,6 @@ const Index = ({
     },
   },
 }) => {
-  console.log({ books })
   return (
     <>
       <Favicons favicons={faviconElements} />
@@ -132,25 +103,25 @@ const Index = ({
           margin: `${theme.space.medium} 0`,
         }}
       >
-        {/* <SummaryList title="What I'm" titleStrong="Coding">
-          {github.pinned.map(repo => (
+        <SummaryList title="What I'm" titleStrong="Coding">
+          {pinnedRepositories.map(repo => (
             <GithubCard key={repo.id} repo={repo} />
           ))}
           <ListBreak title="Contributed" />
-          {github.contributed.map(repo => (
+          {repositoriesContributedTo.map(repo => (
             <GithubCard key={repo.id} repo={repo} />
           ))}
         </SummaryList>
         <SummaryList title="What I'm" titleStrong="Photographing">
-          {combineDataImages(unsplashData, unsplashImages).map(photo => (
-            <UnsplashCard key={photo.id} photo={photo} />
+          {images.map(image => (
+            <UnsplashCard key={image.node.id} image={image.node} />
           ))}
         </SummaryList>
         <SummaryList title="What I'm" titleStrong="Listening To">
-          {combineDataImages(spotifyData, spotifyImages).map(artist => (
-            <SpotifyCard key={artist.id} artist={artist} />
+          {artists.map(artist => (
+            <SpotifyCard key={artist.node.id} artist={artist.node} />
           ))}
-        </SummaryList>*/}
+        </SummaryList>
         <SummaryList
           title="What I'm"
           titleStrong="Reading"
@@ -214,6 +185,76 @@ export const query = graphql`
           name
           hasCoverImage
           shelf
+          childrenFile {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp_noBase64
+              }
+            }
+          }
+        }
+      }
+    }
+    github {
+      user(login: "crosscompile") {
+        pinnedRepositories(first: 20) {
+          nodes {
+            id
+            name
+            description
+            url
+            owner {
+              login
+              url
+            }
+          }
+        }
+        repositoriesContributedTo(
+          privacy: PUBLIC
+          first: 20
+          includeUserRepositories: false
+          contributionTypes: COMMIT
+          orderBy: { field: STARGAZERS, direction: DESC }
+        ) {
+          nodes {
+            id
+            name
+            description
+            url
+            owner {
+              login
+              url
+            }
+          }
+        }
+      }
+    }
+    unsplash: allUnsplashImage {
+      edges {
+        node {
+          id
+          alt_description
+          links {
+            html
+          }
+          childrenFile {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp_noBase64
+              }
+            }
+          }
+        }
+      }
+    }
+    spotify: allSpotifyArtist {
+      edges {
+        node {
+          id
+          external_urls {
+            spotify
+          }
+          name
           childrenFile {
             childImageSharp {
               fluid {

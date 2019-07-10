@@ -20,7 +20,6 @@ export const GoodreadsCard = ({
     ],
   },
 }) => {
-  console.log({ hasCoverImage })
   const Wrapper = hasCoverImage ? VisuallyHidden : React.Fragment
   return (
     <div
