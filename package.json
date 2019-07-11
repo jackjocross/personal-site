@@ -38,12 +38,11 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "npm run data && gatsby build",
+    "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "format": "prettier --write \"src/**/*.js\"",
-    "icons": "svgr --template ./scripts/svgrTemplate.js -d ./src/components/Icon ./icons",
-    "data": "node ./scripts/getData/getData.js"
+    "icons": "svgr --template ./scripts/svgrTemplate.js -d ./src/components/Icon ./icons"
   },
   "devDependencies": {
     "@svgr/cli": "^4.1.0",
