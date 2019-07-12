@@ -5,7 +5,15 @@ import { theme } from '../theme'
 import { responsiveSpace } from './HorizontalList'
 
 export const UnsplashCard = ({
-  photo: { description, url, imageUrl, placeholderUri, fixed },
+  image: {
+    alt_description,
+    links: { html },
+    childrenFile: [
+      {
+        childImageSharp: { fluid },
+      },
+    ],
+  },
 }) => (
   <div css={{ paddingTop: 10, paddingBottom: 70 }}>
     <Card
@@ -19,9 +27,9 @@ export const UnsplashCard = ({
           width: [`calc(100vw - 2 * ${responsiveSpace[0]})`, 320, 320, 320],
         }),
       ]}
-      aria-label={description}
-      title={description}
-      href={url}
+      aria-label={alt_description}
+      title={alt_description}
+      href={html}
       target="_blank"
     >
       <div
@@ -33,7 +41,7 @@ export const UnsplashCard = ({
         ]}
       />
       <Image
-        fixed={fixed}
+        fluid={fluid}
         loading="lazy"
         style={{
           position: 'absolute',

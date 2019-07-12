@@ -13,12 +13,6 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',
-    {
-      resolve: 'gatsby-transformer-json',
-      options: {
-        typeName: `Json`,
-      },
-    },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
@@ -36,10 +30,36 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: 'gatsby-source-goodreads-shelves',
       options: {
-        name: 'data',
-        path: `${__dirname}/data`,
+        key: process.env.GOODREADS_KEY,
+      },
+    },
+    {
+      resolve: 'gatsby-source-unsplash-user',
+      options: {
+        key: process.env.UNSPLASH_KEY,
+        user: 'crossprocess',
+      },
+    },
+    {
+      resolve: 'gatsby-source-spotify-top-artists',
+      options: {
+        refreshToken: process.env.SPOTIFY_REFRESH_TOKEN,
+        clientId: process.env.SPOTIFY_CLIENT_ID,
+        clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      },
+    },
+    {
+      resolve: 'gatsby-source-graphql',
+      options: {
+        typeName: 'GitHub',
+        fieldName: 'github',
+        url: 'https://api.github.com/graphql',
+        headers: {
+          // Learn about environment variables: https://gatsby.dev/env-vars
+          Authorization: `bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+        },
       },
     },
     {
@@ -55,35 +75,6 @@ module.exports = {
         trackingId: 'UA-131786655-1',
       },
     },
-    {
-      resolve: `gatsby-plugin-favicon`,
-      options: {
-        logo: './src/favicon.png',
-
-        appName: 'Palmer',
-        dir: 'rtl',
-        lang: 'en-US',
-        background: '#fff',
-        theme_color: '#000',
-        display: 'standalone',
-        orientation: 'any',
-        start_url: '/',
-        version: '1.0',
-
-        icons: {
-          android: true,
-          appleIcon: true,
-          appleStartup: true,
-          coast: true,
-          favicons: true,
-          firefox: true,
-          opengraph: true,
-          twitter: true,
-          yandex: true,
-          windows: true,
-        },
-      },
-    },
-    'gatsby-plugin-remove-serviceworker',
+    'gatsby-transformer-favicons',
   ],
 }

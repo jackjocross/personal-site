@@ -1,0 +1,8 @@
+{
+  "name": "gatsby-source-unsplash-user",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}

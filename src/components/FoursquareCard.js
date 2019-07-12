@@ -36,7 +36,7 @@ export const FoursquareCard = ({
         ]}
       />
       <Image
-        fixed={fluid}
+        fluid={fluid}
         style={{
           position: 'absolute',
           zIndex: -1,
