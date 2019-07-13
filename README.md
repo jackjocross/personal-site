@@ -1,1 +1,1 @@
-# [cross.cool](https://cross.cool)
+## [cross.cool](https://cross.cool)

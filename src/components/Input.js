@@ -5,13 +5,13 @@ export const Input = ({ component: Component = 'input', ...rest }) => (
   <Component
     css={{
       display: 'block',
-      width: 'calc(100% - 1.5rem)',
+      width: 'calc(100% - 1.7rem)',
       borderRadius: theme.borderRadius,
       border: `2px solid ${theme.color.gray}`,
       fontSize: theme.fontSize.medium,
-      fontFamily: theme.fontFamily,
-      padding: '.85rem .75rem',
+      padding: '.85rem 12px',
       background: theme.color.cloud,
+      transition: 'background ease-in 80ms',
       ':focus': {
         outline: 'none',
         border: `2px solid ${theme.color.purple}`,

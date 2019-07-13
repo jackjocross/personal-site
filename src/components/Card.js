@@ -8,6 +8,7 @@ export const Card = ({ component: Component = LinkArea, ...rest }) => (
     <Component
       css={{
         borderRadius: theme.borderRadius,
+        background: 'white',
         overflow: 'hidden',
         cursor: 'pointer',
         display: 'flex',

@@ -3,7 +3,6 @@ import React from 'react'
 import { theme } from '../theme'
 import { Button } from './Button'
 import { Input } from './Input'
-import { responsiveSpace } from './HorizontalList'
 
 export const ContactForm = () => {
   const [submitted, setSubmitted] = React.useState(false)
@@ -28,7 +27,7 @@ export const ContactForm = () => {
             marginBottom: theme.space.xlarge,
           }}
         >
-          I'll be in touch soon!
+          Thanks for reaching out! I'll be in touch soon.
         </div>
       ) : (
         <>
@@ -58,9 +57,7 @@ export const ContactForm = () => {
               onSubmit={async values => {
                 try {
                   await fetch(
-                    `https://api.formik.io/v1/form/${
-                      process.env.FORMIK_FORM_ID
-                    }/submit`,
+                    'https://api.formik.com/submit/personal/personal-site',
                     {
                       method: 'POST',
                       headers: {
@@ -121,7 +118,7 @@ export const ContactForm = () => {
                     )}
                   />
                   <Button type="submit" css={{ float: 'right' }}>
-                    Submit
+                    Send
                   </Button>
                 </Form>
               )}

@@ -8,7 +8,7 @@ exports.sourceNodes = async (
   const { data } = await axios.get(
     `https://api.unsplash.com/users/${
       pluginOptions.user
-    }/photos?per_page=100&order_by=popular&client_id=${pluginOptions.key}`
+    }/photos?per_page=100&order_by=latest&client_id=${pluginOptions.key}`
   )
 
   for (let image of data) {

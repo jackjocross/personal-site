@@ -32,14 +32,9 @@ const fontWeight = {
   bold: 800,
 }
 
-const fontFamily =
-  '"Fira Code", "Courier", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif, ' +
-  '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' // emoji fonts
+const fontFamily = 'Rubik,sans-serif'
 
-const fontFamilyMono =
-  'SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace'
-
-const lineHeight = 1.3125
+const lineHeight = 1.58
 
 const space = {
   xxsmall: '0.25rem',
@@ -49,6 +44,7 @@ const space = {
   large: '2rem',
   xlarge: '3rem',
   xxlarge: '4.5rem',
+  xxxlarge: '5.5rem',
 }
 
 export const theme = {
@@ -57,7 +53,6 @@ export const theme = {
   mq,
   fontSize,
   fontFamily,
-  fontFamilyMono,
   fontWeight,
   lineHeight,
   space,

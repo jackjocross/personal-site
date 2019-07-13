@@ -9,6 +9,7 @@ const oneWeekAgoSeconds = Math.floor(oneWeekAgo.getTime() / 1000)
 module.exports = {
   siteMetadata: {
     title: 'Jack Cross',
+    url: process.env.NODE_ENV === 'production' ? process.env.URL : '',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -76,5 +77,21 @@ module.exports = {
       },
     },
     'gatsby-transformer-favicons',
+    {
+      resolve: 'gatsby-transformer-og-image',
+      options: {
+        fontPath: './fonts/Rubik-Bold.ttf',
+        fontColor: '#24292e',
+        backgroundColor: '#f7f7f7',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Rubik'],
+        },
+      },
+    },
   ],
 }

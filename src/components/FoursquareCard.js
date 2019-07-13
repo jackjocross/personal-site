@@ -15,7 +15,9 @@ export const FoursquareCard = ({
     ],
   },
 }) => (
-  <div css={{ paddingTop: 10, paddingBottom: 70 }}>
+  <div
+    css={{ paddingTop: theme.space.large, paddingBottom: theme.space.xxxlarge }}
+  >
     <Card
       css={[
         {

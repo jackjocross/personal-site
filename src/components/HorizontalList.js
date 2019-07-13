@@ -23,6 +23,7 @@ export const HorizontalList = ({ children }) => (
             display: 'flex',
             marginLeft: 0,
             marginRight: 0,
+            marginTop: 0,
             paddingLeft: 0,
             paddingRight: 0,
             marginBottom: -30,

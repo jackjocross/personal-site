@@ -7,10 +7,10 @@ export const Button = props => (
       background: theme.color.purple,
       color: theme.color.white,
       borderRadius: theme.borderRadius,
-      fontFamily: theme.fontFamily,
       fontSize: theme.fontSize.medium,
+      fontWeight: theme.fontWeight.bold,
       border: 'none',
-      padding: '.85rem .75rem',
+      padding: '.8rem 12px',
       overflow: 'hidden',
       cursor: 'pointer',
       display: 'flex',
@@ -18,15 +18,6 @@ export const Button = props => (
       whiteSpace: 'normal',
       willChange: 'box-shadow, transform',
       transition: 'box-shadow 100ms ease-in, transform 100ms ease-in-out',
-      ':hover': {
-        transform: 'scale(1.02)',
-      },
-      ':focus': {
-        transform: 'scale(1.02)',
-      },
-      ':active': {
-        transform: 'scale(.98)',
-      },
     }}
     {...props}
   />
