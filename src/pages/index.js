@@ -156,7 +156,7 @@ const Index = ({
           Check out some live data about me below and reach out if anything
           interests you. You can also find me on{' '}
           <Anchor href="https://twitter.com/crosscompile">Twitter</Anchor>,{' '}
-          <Anchor href="https://github.com/crosscompile">Github</Anchor>, and{' '}
+          <Anchor href="https://github.com/crosscompile">GitHub</Anchor>, and{' '}
           <Anchor href="https://www.linkedin.com/in/jack-cross">
             LinkedIn
           </Anchor>
