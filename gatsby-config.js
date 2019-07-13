@@ -80,17 +80,23 @@ module.exports = {
     {
       resolve: 'gatsby-transformer-og-image',
       options: {
-        fontPath: './fonts/Rubik-Bold.ttf',
+        fontPath: './fonts/Rubik-Medium.ttf',
         fontColor: '#24292e',
         backgroundColor: '#f7f7f7',
       },
     },
     {
-      resolve: 'gatsby-plugin-web-font-loader',
+      resolve: 'gatsby-plugin-prefetch-google-fonts',
       options: {
-        google: {
+        fonts: {
           families: ['Rubik'],
         },
+        fonts: [
+          {
+            family: 'Rubik',
+            variangs: ['400', '700'],
+          },
+        ],
       },
     },
   ],

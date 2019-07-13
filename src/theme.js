@@ -29,7 +29,7 @@ const fontSize = {
 
 const fontWeight = {
   medium: 400,
-  bold: 800,
+  bold: 700,
 }
 
 const fontFamily = 'Rubik,sans-serif'

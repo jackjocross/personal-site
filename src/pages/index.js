@@ -80,7 +80,6 @@ const Index = ({
             margin: 0,
             fontFamily: theme.fontFamily,
             fontSize: theme.fontSize.root,
-            fontDisplay: 'swap',
             lineHeight: theme.lineHeight,
           },
         }}
