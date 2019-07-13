@@ -80,9 +80,9 @@ module.exports = {
     {
       resolve: 'gatsby-transformer-og-image',
       options: {
-        fontPath: './fonts/Rubik-Medium.ttf',
-        fontColor: '#24292e',
-        backgroundColor: '#f7f7f7',
+        fontPath: './fonts/Rubik-Regular.ttf',
+        fontColor: '#000000',
+        backgroundColor: '#ffffff',
       },
     },
     {
