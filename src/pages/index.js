@@ -32,7 +32,7 @@ const Index = ({
     goodreads: { edges: books },
     github: {
       user: {
-        pinnedRepositories: { nodes: pinnedRepositories },
+        pinnedItems: { nodes: pinnedItems },
         repositoriesContributedTo: { nodes: repositoriesContributedTo },
       },
     },
@@ -170,7 +170,7 @@ const Index = ({
         titleStrong="Coding"
         css={{ background: '#f4f5f7' }}
       >
-        {pinnedRepositories.map(repo => (
+        {pinnedItems.map(repo => (
           <GithubCard key={repo.id} repo={repo} />
         ))}
         <ListBreak title="Contributed" />
@@ -277,7 +277,7 @@ export const query = graphql`
     }
     github {
       user(login: "crosscompile") {
-        pinnedRepositories(first: 20) {
+        pinnedItems(first: 20) {
           nodes {
             id
             name
