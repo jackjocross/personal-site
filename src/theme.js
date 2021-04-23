@@ -32,7 +32,7 @@ const fontWeight = {
   bold: 700,
 }
 
-const fontFamily = 'Rubik,sans-serif'
+const fontFamily = `'DIN',-apple-system,'BlinkMacSystemFont','Segoe UI','Roboto','Oxygen','Ubuntu','Cantarell','Fira Sans','Droid Sans','Helvetica Neue',sans-serif`
 
 const lineHeight = 1.58
 

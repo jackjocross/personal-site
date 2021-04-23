@@ -29,7 +29,7 @@ const Index = ({
     spotify: { edges: artists },
     unsplash: { edges: images },
     foursquare: { edges: checkins },
-    goodreads: { edges: books },
+    // goodreads: { edges: books },
     github: {
       user: {
         pinnableItems: { nodes: pinnableItems },
@@ -195,7 +195,7 @@ const Index = ({
         ))}
       </SummaryList>
       <WaveSecondary color="#ffffff" />
-      <SummaryList
+      {/* <SummaryList
         title="What I'm"
         titleStrong="Reading"
         css={{ background: '#ffffff' }}
@@ -212,7 +212,7 @@ const Index = ({
           .map(({ node: book }) => (
             <GoodreadsCard key={book.id} book={book} />
           ))}
-      </SummaryList>
+      </SummaryList> */}
       <WavePrimary color="#f4f5f7" />
       <SummaryList
         title="Where I'm"
@@ -245,26 +245,6 @@ export const query = graphql`
             id
             name
           }
-          childrenFile {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
-            }
-          }
-        }
-      }
-    }
-    goodreads: allGoodreadsBook {
-      edges {
-        node {
-          id
-          authorLink
-          bookLink
-          title
-          name
-          hasCoverImage
-          shelf
           childrenFile {
             childImageSharp {
               fluid {
@@ -368,3 +348,25 @@ export const query = graphql`
 `
 
 export default Index
+
+const goodreadsQuery = `
+goodreads: allGoodreadsBook {
+  edges {
+    node {
+      id
+      authorLink
+      bookLink
+      title
+      name
+      hasCoverImage
+      shelf
+      childrenFile {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_withWebp_noBase64
+          }
+        }
+      }
+    }
+  }
+}`

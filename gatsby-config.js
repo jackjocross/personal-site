@@ -30,12 +30,12 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: 'gatsby-source-goodreads-shelves',
-      options: {
-        key: process.env.GOODREADS_KEY,
-      },
-    },
+    // {
+    //   resolve: 'gatsby-source-goodreads-shelves',
+    //   options: {
+    //     key: process.env.GOODREADS_KEY,
+    //   },
+    // },
     {
       resolve: 'gatsby-source-unsplash-user',
       options: {
@@ -83,20 +83,6 @@ module.exports = {
         fontPath: './fonts/Rubik-Regular.ttf',
         fontColor: '#000000',
         backgroundColor: '#ffffff',
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-prefetch-google-fonts',
-      options: {
-        fonts: {
-          families: ['Rubik'],
-        },
-        fonts: [
-          {
-            family: 'Rubik',
-            variangs: ['400', '700'],
-          },
-        ],
       },
     },
   ],
