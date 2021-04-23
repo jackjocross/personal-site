@@ -32,8 +32,8 @@ const Index = ({
     // goodreads: { edges: books },
     github: {
       user: {
-        pinnableItems: { nodes: pinnableItems },
-        repositoriesContributedTo: { nodes: repositoriesContributedTo },
+        pinnedItems: { nodes: pinnableItems },
+        topRepositories: { nodes: repositoriesContributedTo },
       },
     },
     logo: {
@@ -174,9 +174,11 @@ const Index = ({
           <GithubCard key={repo.id} repo={repo} />
         ))}
         <ListBreak title="Contributed" />
-        {repositoriesContributedTo.map(repo => (
-          <GithubCard key={repo.id} repo={repo} />
-        ))}
+        {repositoriesContributedTo
+          .filter(repo => !!repo)
+          .map(repo => (
+            <GithubCard key={repo.id} repo={repo} />
+          ))}
       </SummaryList>
       <WaveSecondary color="#ffffff" />
       <SummaryList title="What I'm" titleStrong="Photographing">
@@ -257,7 +259,7 @@ export const query = graphql`
     }
     github {
       user(login: "crosscompile") {
-        pinnableItems(types: REPOSITORY, first: 20) {
+        pinnedItems(types: REPOSITORY, first: 20) {
           nodes {
             ... on GitHub_Repository {
               id
@@ -271,11 +273,9 @@ export const query = graphql`
             }
           }
         }
-        repositoriesContributedTo(
-          privacy: PUBLIC
-          first: 20
-          includeUserRepositories: false
-          contributionTypes: COMMIT
+        topRepositories(
+          first: 40
+          since: "2018-01-01T00:00:00.000Z"
           orderBy: { field: STARGAZERS, direction: DESC }
         ) {
           nodes {
