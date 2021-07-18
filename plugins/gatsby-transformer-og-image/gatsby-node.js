@@ -139,7 +139,7 @@ async function generateOgImage(
       right: 824,
       background: backgroundColor,
     })
-    .overlayWith(textImage, { gravity: 'south' })
+    .composite([{ input: textImage, gravity: 'south' }])
     .toBuffer()
 
   sharp(addText)

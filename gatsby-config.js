@@ -9,7 +9,7 @@ const oneWeekAgoSeconds = Math.floor(oneWeekAgo.getTime() / 1000)
 module.exports = {
   siteMetadata: {
     title: 'Jack Cross',
-    url: process.env.NODE_ENV === 'production' ? process.env.URL : '',
+    url: process.env.URL,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
