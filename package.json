@@ -1,9 +1,7 @@
 {
   "name": "personal-site",
   "private": true,
-  "description": "My personal website",
   "version": "0.1.0",
-  "author": "Jack Cross",
   "dependencies": {
     "@emotion/core": "^10.0.6",
     "dotenv": "^6.2.0",
@@ -34,9 +32,6 @@
     "react-helmet": "^5.2.0",
     "react-tilt": "^0.1.4"
   },
-  "keywords": [
-    "gatsby"
-  ],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
@@ -49,12 +44,5 @@
     "@svgr/cli": "^4.1.0",
     "babel-plugin-emotion": "^10.0.6",
     "prettier": "^1.15.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
