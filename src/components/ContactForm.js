@@ -57,7 +57,7 @@ export const ContactForm = () => {
               onSubmit={async values => {
                 try {
                   await fetch(
-                    'https://api.formik.com/submit/personal/personal-site',
+                    'https://api.formium.io/submit/5cd09f1b7eea6300015f8673/personal-site',
                     {
                       method: 'POST',
                       headers: {

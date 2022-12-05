@@ -17,10 +17,6 @@ import { WavePrimary, WaveSecondary } from '../components/Wave'
 import Helmet from 'react-helmet'
 import { Anchor } from '../components/Anchor'
 
-const description = `Welcome!  During the day I work as a software engineer in 
-  New York City, but at night (or in my other free time) I enjoy photography, 
-  music, and exploring the city.`
-
 const Index = ({
   data: {
     site: {
@@ -57,17 +53,12 @@ const Index = ({
         title={title}
         meta={[
           { property: 'og:title', content: 'Jack Cross' },
-          { property: 'og:description', content: description },
           {
             property: 'og:image',
             content: `${url}${src}`,
           },
           { name: 'twitter:card', content: 'summary_large_image' },
           { name: 'twitter:title', content: 'Jack Cross' },
-          {
-            name: 'twitter:description',
-            content: description,
-          },
           {
             name: 'twitter:image',
             content: `${url}${src}`,
@@ -140,27 +131,15 @@ const Index = ({
         <h1>{title}</h1>
         <p
           css={{
-            marginBottom: 0,
             fontSize: theme.fontSize.large,
             maxWidth: '70ch',
           }}
         >
-          {description}
-        </p>
-        <p
-          css={{
-            fontSize: theme.fontSize.large,
-            maxWidth: '70ch',
-          }}
-        >
-          Check out some live data about me below and reach out if anything
-          interests you. You can also find me on{' '}
-          <Anchor href="https://twitter.com/crosscompile">Twitter</Anchor>,{' '}
-          <Anchor href="https://github.com/crosscompile">GitHub</Anchor>, and{' '}
+          <Anchor href="https://twitter.com/crosscompile">Twitter</Anchor> -{' '}
+          <Anchor href="https://github.com/crosscompile">GitHub</Anchor> -{' '}
           <Anchor href="https://www.linkedin.com/in/jack-cross">
             LinkedIn
           </Anchor>
-          .
         </p>
       </div>
 
@@ -215,11 +194,11 @@ const Index = ({
             <GoodreadsCard key={book.id} book={book} />
           ))}
       </SummaryList> */}
-      <WavePrimary color="#f4f5f7" />
+      {/* <WavePrimary color="#f4f5f7" /> */}
       <SummaryList
         title="Where I'm"
         titleStrong="Going"
-        css={{ background: '#f4f5f7' }}
+        css={{ background: '#ffffff' }}
       >
         {checkins.map(checkin => (
           <FoursquareCard key={checkin.node.id} checkin={checkin.node} />
