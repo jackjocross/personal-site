@@ -237,7 +237,7 @@ export const query = graphql`
       }
     }
     github {
-      user(login: "crosscompile") {
+      user(login: "jackjocross") {
         pinnedItems(types: REPOSITORY, first: 20) {
           nodes {
             ... on GitHub_Repository {
