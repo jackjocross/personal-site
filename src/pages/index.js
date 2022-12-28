@@ -135,9 +135,9 @@ const Index = ({
             maxWidth: '70ch',
           }}
         >
-          <Anchor href="https://twitter.com/crosscompile">Twitter</Anchor> -{' '}
-          <Anchor href="https://github.com/crosscompile">GitHub</Anchor> -{' '}
-          <Anchor href="https://www.linkedin.com/in/jack-cross">
+          <Anchor href="https://twitter.com/jackjocross">Twitter</Anchor> -{' '}
+          <Anchor href="https://github.com/jackjocross">GitHub</Anchor> -{' '}
+          <Anchor href="https://www.linkedin.com/in/jackjocross">
             LinkedIn
           </Anchor>
         </p>
