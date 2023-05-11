@@ -1,13 +1,10 @@
 import { Global } from '@emotion/core'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import React from 'react'
-import Tilt from 'react-tilt'
 import { ContactForm } from '../components/ContactForm'
 import { FoursquareCard } from '../components/FoursquareCard'
 import { GithubCard } from '../components/GithubCard'
-import { GoodreadsCard } from '../components/GoodreadsCard'
 import { ListBreak } from '../components/ListBreak'
-import { Logo } from '../components/Logo'
 import { SpotifyCard } from '../components/SpotifyCard'
 import { SummaryList } from '../components/SummaryList'
 import { UnsplashCard } from '../components/UnsplashCard'
@@ -16,6 +13,8 @@ import { Favicons } from '../components/Favicons'
 import { WavePrimary, WaveSecondary } from '../components/Wave'
 import Helmet from 'react-helmet'
 import { Anchor } from '../components/Anchor'
+import { Image } from '../components/Image'
+import { Card } from '../components/Card'
 
 const Index = ({
   data: {
@@ -25,7 +24,6 @@ const Index = ({
     spotify: { edges: artists },
     unsplash: { edges: images },
     foursquare: { edges: checkins },
-    // goodreads: { edges: books },
     github: {
       user: {
         pinnedItems: { nodes: pinnableItems },
@@ -40,6 +38,7 @@ const Index = ({
             childOgImage: {
               ogImageWithText: { src },
             },
+            childImageSharp: { fluid },
           },
         },
       ],
@@ -90,43 +89,25 @@ const Index = ({
         })}
       >
         <div css={{ marginBottom: theme.space.medium }}>
-          <Tilt
-            options={{ max: 10, scale: 1.02 }}
-            style={{ height: 200, width: 200 }}
-          >
-            <Link
-              to="/"
-              css={{
+          <Card
+            component="a"
+            css={[
+              {
                 position: 'relative',
-                display: 'block',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
+              },
+            ]}
+            href={'/'}
+          >
+            <Image
+              fluid={fluid}
+              loading="lazy"
+              style={{
                 width: 200,
                 height: 200,
               }}
-            >
-              <div
-                css={{
-                  background:
-                    'linear-gradient(45deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);',
-                  boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
-                  borderRadius: 3,
-                  position: 'absolute',
-                  width: 200,
-                  height: 200,
-                }}
-              />
-              <Logo
-                width={150}
-                height={150}
-                css={{
-                  mixBlendMode: 'screen',
-                  position: 'absolute',
-                  padding: 25,
-                  top: 0,
-                  left: 0,
-                }}
-              />
-            </Link>
-          </Tilt>
+            />
+          </Card>
         </div>
         <h1>{title}</h1>
         <p
@@ -176,25 +157,6 @@ const Index = ({
         ))}
       </SummaryList>
       <WaveSecondary color="#ffffff" />
-      {/* <SummaryList
-        title="What I'm"
-        titleStrong="Reading"
-        css={{ background: '#ffffff' }}
-      >
-        {books
-          .filter(({ node: { shelf } }) => shelf === 'currently-reading')
-          .map(({ node: book }) => (
-            <GoodreadsCard key={book.id} book={book} />
-          ))}
-
-        <ListBreak title="Read" />
-        {books
-          .filter(({ node: { shelf } }) => shelf === 'read')
-          .map(({ node: book }) => (
-            <GoodreadsCard key={book.id} book={book} />
-          ))}
-      </SummaryList> */}
-      {/* <WavePrimary color="#f4f5f7" /> */}
       <SummaryList
         title="Where I'm"
         titleStrong="Going"
@@ -320,6 +282,11 @@ export const query = graphql`
               src
             }
           }
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid_withWebp_noBase64
+            }
+          }
         }
       }
     }
@@ -327,25 +294,3 @@ export const query = graphql`
 `
 
 export default Index
-
-const goodreadsQuery = `
-goodreads: allGoodreadsBook {
-  edges {
-    node {
-      id
-      authorLink
-      bookLink
-      title
-      name
-      hasCoverImage
-      shelf
-      childrenFile {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_withWebp_noBase64
-          }
-        }
-      }
-    }
-  }
-}`
